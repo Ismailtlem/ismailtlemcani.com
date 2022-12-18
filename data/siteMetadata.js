@@ -5,7 +5,7 @@ const siteMetadata = {
   description: 'A blog created with Next.js and Tailwind.css',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://ismail-tlemcani-blog.vercel.app/',
+  siteUrl: 'https://ismailtlemcani.com/',
   siteRepo: 'https://github.com/Ismailtlem/ismail-tlemcani-blog',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',

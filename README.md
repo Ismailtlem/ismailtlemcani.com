@@ -1,6 +1,6 @@
 ## My Personal Website
 
-https://ismail-tlemcani-blog.vercel.app/
+https://ismailtlemcani.com/
 
 ## Get Started
 
