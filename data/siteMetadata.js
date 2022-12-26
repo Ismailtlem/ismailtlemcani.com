@@ -2,7 +2,7 @@ const siteMetadata = {
   title: `Ismail Tlemcani's blog`,
   author: 'Ismail Tlemcani',
   headerTitle: 'Ismail Tlemcani',
-  description: 'A blog created with Next.js and Tailwind.css',
+  description: '',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://ismailtlemcani.com/',
