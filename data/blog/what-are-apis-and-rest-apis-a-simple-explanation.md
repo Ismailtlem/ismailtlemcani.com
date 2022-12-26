@@ -1,7 +1,7 @@
 ---
 title: What are APIs and REST APIs? - A Simple Explanation
 date: '2021-02-12'
-tags: ['api', 'javascript', 'react', 'web-development', 'axios', 'beginners', 'rest-api']
+tags: ['api', 'javascript', 'web-development', 'axios', 'beginners', 'rest-api']
 draft: false
 summary: 'Demystifying the words API and REST APIs in very simple terms'
 ---
