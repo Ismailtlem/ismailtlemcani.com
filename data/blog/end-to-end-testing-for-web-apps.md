@@ -29,7 +29,7 @@ If, for some particular feature, the output of the software under test equals th
 
 In simple terms, end to end testing is a level of testing that involves testing an application's workflow from beginning to end. We will go through a popular tool used for end to end testing of web applications in the next sections.
 
-## Cypress
+## Popular tool for end to end testing of web applications : Cypress
 
 Cypress is a testing framework for testing web applications. Cypress is usually used for end to end testing of web applications but can also be used for unit testing and integration testing.
 
@@ -44,7 +44,7 @@ If you are using npm, you can install Cypress only by :
 npm i cypress --save-dev
 ```
 
-## Getting started with Cypress and writing your first tests for a React app
+## Getting started with Cypress and writing your first tests
 
 For the steps below, you'll need node and npm installed on your machine. Start by creating a react app in your local folder by running the following command :
 
