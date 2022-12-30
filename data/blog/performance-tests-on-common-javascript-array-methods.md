@@ -1,0 +1,236 @@
+---
+title: 'Performance Tests on Common JavaScript Array Methods'
+date: '2022-03-19'
+tags: ['JavaScript', 'web-development', 'software-development', 'arrays', 'lists']
+draft: false
+summary: 'Which of the JavaScript array methods is the fastest to loop through an array ? '
+---
+
+![js-methods](/static/images/js-methods.png)
+
+This blog post is about comparing the running times of the most commonly used ways to loop through an array in JavaScript in order to see which one is the most efficient.
+
+## The tests
+
+The idea is very simple. I compared the running times of five very common ways ( `map`, `forEach`, `for`, `while`, `do while`) of looping through an array using an array of 100 values and another array of 10 million values.
+The code used was run in a Node.js runtime environment version 16.14.0 inside a Ubuntu 20 laptop.
+
+## Testing the .map() method
+
+Here is the code used for an array of 100 values
+
+```javascript
+const arraySize = 100
+
+const arrayToTest = Array(arraySize)
+  .fill(0)
+  .map((_, i) => i)
+
+// small code to warm up the process used
+for (let index = 0; index < arrayToTest; index++) {
+  index * index + Math.sqrt(item)
+}
+
+console.time('map')
+arrayToTest.map((item, index) => {
+  return (arrayToTest[index] = item * item + Math.sqrt(item))
+})
+console.timeEnd('map')
+```
+
+Here is the result I got from the above code :
+
+```
+map: 0.150ms
+```
+
+For an array of 10 million values, I used the same code as above while just replacing the `arraySize` constant with 10000000. Here is the result I got :
+
+```
+map: 1865.563ms
+```
+
+## Testing the .forEach() method
+
+Here is the code used for an array of 100 values
+
+```javascript
+const arraySize = 100
+
+const arrayToTest = Array(arraySize)
+  .fill(0)
+  .map((_, i) => i)
+
+// small code to warm up the process used
+for (let index = 0; index < arrayToTest; index++) {
+  index * index + Math.sqrt(item)
+}
+
+console.time('forEach')
+arrayToTest.forEach((item, index) => {
+  return (arrayToTest[index] = item * item + Math.sqrt(item))
+})
+console.timeEnd('forEach')
+```
+
+Here is the result I got from the above code :
+
+```
+forEach: 0.137ms
+```
+
+For an array of 10 million values, I used the same code as above while just replacing the `arraySize` constant with 10000000. Here is the result I got :
+
+```
+forEach: 1201.149ms
+```
+
+## Testing the for loop
+
+Here is the code used for an array of 100 values
+
+```javascript
+const arraySize = 100
+
+const arrayToTest = Array(arraySize)
+  .fill(0)
+  .map((_, i) => i)
+
+// small code to warm up the process used
+for (let index = 0; index < arrayToTest; index++) {
+  index * index + Math.sqrt(item)
+}
+
+console.time('for')
+for (let i = 0; i < arrayToTest.length; i++) {
+  arrayToTest[i] = arrayToTest[i] * arrayToTest[i] + Math.sqrt(arrayToTest[i])
+}
+console.timeEnd('for')
+```
+
+Here is the result I got from the above code :
+
+```
+for: 0.127ms
+```
+
+For an array of 10 million values, I used the same code as above while just replacing the `arraySize` constant with 10000000. Here is the result I got :
+
+```
+for: 109.778ms
+```
+
+## Testing the while loop
+
+Here is the code used for an array of 100 values
+
+```javascript
+const arraySize = 100
+
+const arrayToTest = Array(arraySize)
+  .fill(0)
+  .map((_, i) => i)
+
+// small code to warm up the process used
+for (let index = 0; index < arrayToTest; index++) {
+  index * index + Math.sqrt(item)
+}
+
+console.time('while')
+let i = 0
+while (i < arrayToTest.length) {
+  arrayToTest[i] = arrayToTest[i] * arrayToTest[i] + Math.sqrt(arrayToTest[i])
+  i++
+}
+console.timeEnd('while')
+```
+
+Here is the result I got from the above code :
+
+```
+while: 0.294ms
+```
+
+For an array of 10 million values, I used the same code as above while just replacing the `arraySize` constant with 10000000. Here is the result I got :
+
+```
+while: 108.698ms
+```
+
+## Testing the do…while loop
+
+Here is the code used for an array of 100 values
+
+```javascript
+const arraySize = 100
+
+const arrayToTest = Array(arraySize)
+  .fill(0)
+  .map((_, i) => i)
+
+// small code to warm up the process used
+for (let index = 0; index < arrayToTest; index++) {
+  index * index + Math.sqrt(item)
+}
+
+console.time('do while')
+let i = 0
+do {
+  arrayToTest[i] = arrayToTest[i] * arrayToTest[i] + Math.sqrt(arrayToTest[i])
+  i++
+} while (i < arrayToTest.length)
+console.timeEnd('do while')
+```
+
+Here is the result I got from the above code :
+
+```
+do while: 0.118ms
+```
+
+For an array of 10 million values, I used the same code as above while just replacing the `arraySize` constant with 10000000. Here is the result I got :
+
+```
+do while: 124.894ms
+```
+
+## Summary
+
+For the array with 100 values, here are the results I got
+
+```
+map: 0.150ms
+forEach: 0.137ms
+for: 0.127ms
+while: 0.120ms
+do while: 0.118ms
+```
+
+For the second array with 10 millions values, here are the results I got
+
+```
+map: 1865.563ms
+forEach: 1201.149ms
+for: 109.778ms
+while: 145.869ms
+do while: 124.894ms
+```
+
+- In small arrays, the optimization work done by the V8 engine while compiling our JavaScript code is good enough and the running times of the methods tested above are very close.
+
+- In big arrays, map() and forEach() take much more time (more than eleven times as shown in this example) than the other methods.
+  One factor causing this additional time is invoking callback functions which consume more memory and therefore add more performance costs in big arrays.
+  for while or do while have very close running times in big arrays and it is difficult to say, at least from the examples above, that one is radically faster than the others in big arrays.
+  Additional tests are needed in that sense to determine which method is the most efficient.
+
+## Conclusion
+
+- Whenever we have to write a loop, it is important to consider what solution works best.
+  In relatively small arrays, the optimization work done by the V8 engine is good enough.
+  However, when processing a large amount of data, then the performance cost might be important if we don’t carefully choose the most efficient solution and the running time then might be, eleven times more in some cases as shown in the results above.
+
+- Performance is not the only thing that matters.
+  Code readability and maintainability are also very important when writing code in any programming language.
+  You can check a previous article I wrote on how to write clean code for JavaScript developers.
+
+If this post was helpful to you in any way, please don't hesitate to share it. You can also follow my [Twitter](https://twitter.com/ismailtlem) account if you would like to see more content related to web programming.
