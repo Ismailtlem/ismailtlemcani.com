@@ -1,0 +1,84 @@
+
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+      <title>Ismail Tlemcani&#39;s blog</title>
+      <link>https://ismailtlemcani.com//blog</link>
+      <description></description>
+      <language>en-us</language>
+      <managingEditor>ismail.tlemcani@gmail.com (Ismail Tlemcani)</managingEditor>
+      <webMaster>ismail.tlemcani@gmail.com (Ismail Tlemcani)</webMaster>
+      <lastBuildDate>Fri, 30 Dec 2022 00:00:00 GMT</lastBuildDate>
+      <atom:link href="https://ismailtlemcani.com//feed.xml" rel="self" type="application/rss+xml"/>
+      
+  <item>
+    <guid>https://ismailtlemcani.com//blog/top-3-free-resources-to-learn-django-in-2023</guid>
+    <title>Top 3 Free Resources to Learn Django in 2023</title>
+    <link>https://ismailtlemcani.com//blog/top-3-free-resources-to-learn-django-in-2023</link>
+    <description>Introduction to the Django Framework and a handpicked list of free resources to learn this framework</description>
+    <pubDate>Fri, 30 Dec 2022 00:00:00 GMT</pubDate>
+    <author>ismail.tlemcani@gmail.com (Ismail Tlemcani)</author>
+    <category>django</category><category>python</category><category>web-development</category><category>learn-to-code</category><category>software-development</category><category>software-engineering</category>
+  </item>
+
+  <item>
+    <guid>https://ismailtlemcani.com//blog/performance-tests-on-common-javascript-array-methods</guid>
+    <title>Performance Tests on Common JavaScript Array Methods</title>
+    <link>https://ismailtlemcani.com//blog/performance-tests-on-common-javascript-array-methods</link>
+    <description>Which of the JavaScript array methods is the fastest to loop through an array ? </description>
+    <pubDate>Sat, 19 Mar 2022 00:00:00 GMT</pubDate>
+    <author>ismail.tlemcani@gmail.com (Ismail Tlemcani)</author>
+    <category>JavaScript</category><category>web-development</category><category>software-development</category><category>arrays</category><category>lists</category>
+  </item>
+
+  <item>
+    <guid>https://ismailtlemcani.com//blog/quick-tips-for-migrating-from-javascript-to-typescript</guid>
+    <title>Quick Tips For Migrating from JavaScript to TypeScript</title>
+    <link>https://ismailtlemcani.com//blog/quick-tips-for-migrating-from-javascript-to-typescript</link>
+    <description>Some useful tips to keep in mind when migrating your JavaScript project to TypeScript</description>
+    <pubDate>Tue, 02 Nov 2021 00:00:00 GMT</pubDate>
+    <author>ismail.tlemcani@gmail.com (Ismail Tlemcani)</author>
+    <category>TypeScript</category><category>web-development</category><category>react</category><category>JavaScript</category>
+  </item>
+
+  <item>
+    <guid>https://ismailtlemcani.com//blog/clean-code-book-for-javascript-developers</guid>
+    <title>The Clean Code Book for Javascript Developers: A Quick Summary</title>
+    <link>https://ismailtlemcani.com//blog/clean-code-book-for-javascript-developers</link>
+    <description>Blog post summarizing the book “Clean Code” written by Robert Martin on how to write a readable and maintainable code.</description>
+    <pubDate>Thu, 22 Jul 2021 00:00:00 GMT</pubDate>
+    <author>ismail.tlemcani@gmail.com (Ismail Tlemcani)</author>
+    <category>software-development</category><category>software-engineering</category><category>clean-code</category><category>JavaScript</category><category>robert-c-martin</category>
+  </item>
+
+  <item>
+    <guid>https://ismailtlemcani.com//blog/end-to-end-testing-for-web-apps</guid>
+    <title>Taking A Glance At Software Testing, In Particular E2E Web Apps Testing</title>
+    <link>https://ismailtlemcani.com//blog/end-to-end-testing-for-web-apps</link>
+    <description>Software testing from a very simple perspective and in particular, end to end testing for web applications</description>
+    <pubDate>Fri, 16 Apr 2021 00:00:00 GMT</pubDate>
+    <author>ismail.tlemcani@gmail.com (Ismail Tlemcani)</author>
+    <category>testing</category><category>Cypress</category><category>react</category><category>web-development</category><category>code-quality</category><category>JavaScript</category>
+  </item>
+
+  <item>
+    <guid>https://ismailtlemcani.com//blog/what-are-apis-and-rest-apis-a-simple-explanation</guid>
+    <title>What are APIs and REST APIs? - A Simple Explanation</title>
+    <link>https://ismailtlemcani.com//blog/what-are-apis-and-rest-apis-a-simple-explanation</link>
+    <description>Demystifying the words API and REST APIs in very simple terms</description>
+    <pubDate>Fri, 12 Feb 2021 00:00:00 GMT</pubDate>
+    <author>ismail.tlemcani@gmail.com (Ismail Tlemcani)</author>
+    <category>api</category><category>JavaScript</category><category>web-development</category><category>beginners</category><category>rest-api</category>
+  </item>
+
+  <item>
+    <guid>https://ismailtlemcani.com//blog/best-tools-for-building-your-first-mern-application</guid>
+    <title>Best Tools For Building Your First MERN Application</title>
+    <link>https://ismailtlemcani.com//blog/best-tools-for-building-your-first-mern-application</link>
+    <description>Top tools to use to build your first web application using the MERN stack</description>
+    <pubDate>Tue, 12 Jan 2021 00:00:00 GMT</pubDate>
+    <author>ismail.tlemcani@gmail.com (Ismail Tlemcani)</author>
+    <category>react</category><category>JavaScript</category><category>nodejs</category><category>mongodb</category><category>expressjs</category><category>beginners</category>
+  </item>
+
+    </channel>
+  </rss>
