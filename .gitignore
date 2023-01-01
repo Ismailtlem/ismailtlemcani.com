@@ -12,7 +12,7 @@
 /.next/
 /out/
 .vercel
-
+public/**/feed.xml
 # production
 /build
 
