@@ -6,8 +6,6 @@ draft: false
 summary: 'Software testing from a very simple perspective and in particular, end to end testing for web applications'
 ---
 
-![end-to-end-testing-process](/static/images/end-to-end-testing-process.png)
-
 In this article, we will try to explain software testing from a very simple perspective and look in particular into end to end testing of web applications. We will also explore Cypress which is a very popular tool used in end to end testing of web applications.
 
 ## What is Software testing ?
