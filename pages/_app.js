@@ -10,7 +10,8 @@ import Head from 'next/head'
 
 import siteMetadata from '@/data/siteMetadata'
 import LayoutWrapper from '@/components/LayoutWrapper'
-import { ClientReload } from '@/components/ClientReload'
+import dynamic from 'next/dynamic'
+const { ClientReload } = dynamic(() => import('@/components/ClientReload'))
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 const isSocket = process.env.SOCKET

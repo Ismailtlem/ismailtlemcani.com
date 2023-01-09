@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import Link from 'next/link'
+import dynamic from 'next/dynamic'
+const Link = dynamic(() => import('next/link'))
 
 const CustomLink = ({ href, ...rest }) => {
   const isInternalLink = href && href.startsWith('/')

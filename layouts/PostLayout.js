@@ -1,11 +1,13 @@
-import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
 import { BlogSEO } from '@/components/SEO'
-import Image from '@/components/Image'
-import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import dynamic from 'next/dynamic'
+
+const Image = dynamic(() => import('@/components/Image'))
+const Link = dynamic(() => import('@/components/Link'))
+const Tag = dynamic(() => import('@/components/Link'))
 
 const editUrl = (fileName) => `${siteMetadata.siteRepo}/blob/main/data/blog/${fileName}`
 
