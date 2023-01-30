@@ -232,5 +232,3 @@ do while: 124.894ms
 - Performance is not the only thing that matters.
   Code readability and maintainability are also very important when writing code in any programming language.
   You can check a previous article I wrote on how to write clean code for JavaScript developers.
-
-If this post was helpful to you in any way, please don't hesitate to share it. You can also follow my [Twitter](https://twitter.com/ismailtlem) account if you would like to see more content related to web programming.

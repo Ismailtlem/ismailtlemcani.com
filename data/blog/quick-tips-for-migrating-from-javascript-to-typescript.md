@@ -198,5 +198,3 @@ student.age = 15
 Migrating a project to TypeScript is not that much of a hassle. As every JavaScript code is a valid TypeScript code, you can choose to only convert the files where you need strict typing and then go over the remaining files as you want.
 
 The list above of tips is far from being exhaustive. There is a [guide](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html) on the official TypeScript documentation that provides more information.
-
-If this post was helpful to you in any way, please don't hesitate to share it. You can also follow my [Twitter](https://twitter.com/ismailtlem) account if you would like to see more content related to web programming.

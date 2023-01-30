@@ -1,9 +1,9 @@
 ---
-title: Different ways to merge dictionaries in Python
+title: 4 simple ways to merge dictionaries in Python
 date: '2023-01-29'
 tags: ['Python', 'dictionaries', 'beginners']
 draft: false
-summary: 'Different ways to merge dictionnaries in Python in one line'
+summary: 'How you can merge your Python dictionnaries in one line'
 ---
 
 ![merge-python-dictionaries](/static/images/merge-python-dictionaries.png)
@@ -55,7 +55,7 @@ The above code will give the following result
  {'m': 1, 'l': 59, 'z': 3, 'c': 4}
 ```
 
-3. Using `collections.ChainMap` : `ChainMap` object groups multiple dicts (or other mappings) together to create a single, updateable dictionary. Below is an example on how you can use it:
+4. Using `collections.ChainMap` : `ChainMap` object helps to group multiple dictionaries together to create a single, updateable dictionary. Below is an example on how you can use it:
 
 ```python
 from collections import ChainMap

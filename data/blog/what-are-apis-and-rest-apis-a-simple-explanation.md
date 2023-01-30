@@ -66,5 +66,3 @@ In order for an API to be considered as RESTful, it has to follow the six follow
 
 In simple terms, an API is just a piece of code that allows two programs to communicate with each other.
 Those communications are based on a set of rules that developers follow in order to make the consumption of the data as easy and as smooth as possible.
-
-If this post was helpful to you in any way, please don't hesitate to share it. You can also follow my [Twitter account](https://twitter.com/ismailtlem) if you would like to see more content related to web programming.

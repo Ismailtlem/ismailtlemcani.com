@@ -151,5 +151,3 @@ The testing activity is simply the activity done to test the behavior of some so
 
 End to end testing is the testing activity done to test the complete behavioral flow of an application from start to finish. For end to end testing of a web application, Cypress is a great tool that any junior web developer can quickly grasp.
 However, in this blog post, we only made a quick introduction into this tool. If you want to dive deep into it, their [official documentation](https://docs.cypress.io/) is the best asset to look into.
-
-If this post was helpful to you in any way, please don't hesitate to share it. You can also follow my [Twitter](https://twitter.com/ismailtlem) account if you would like to see more content related to web programming.

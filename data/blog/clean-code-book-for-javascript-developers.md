@@ -246,7 +246,4 @@ This is what Kent Beck's four rules of Simple Design are about. In a nutshell, a
 ## Final words
 
 Because a given software code is an artifact that will live long after it is first created and will certainly be edited and improved in its lifetime, a developer's job shouldn’t be just about writing a functioning code.
-Developers must write a clean code that is easy to maintain and easy to read and follow. To reach that objective, developers must follow the habits and practises gained from years of experience of the most experienced developers in the field.
-That’s what the clean code rules we talked about in this blog post are all about.
-
-If this post was helpful to you in any way, please don't hesitate to share it. You can also follow my [Twitter](https://twitter.com/ismailtlem) account if you would like to see more content related to web programming.
+Developers must write a clean code that is easy to maintain and easy to read and follow. That’s what the clean code rules we talked about in this post are all about.
