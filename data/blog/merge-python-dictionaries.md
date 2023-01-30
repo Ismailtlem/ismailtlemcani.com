@@ -45,8 +45,8 @@ The above code will give the following result
 ```python
 dict1 = {'m': 1, 'l': 59}
 dict2 = {'z': 3, 'c': 4}
-dict3 = dict(dict1, **dict2)
-print(dict3)
+merged_dict = dict(dict1, **dict2)
+print(merged_dict)
 ```
 
 The above code will give the following result
@@ -61,12 +61,12 @@ The above code will give the following result
 from collections import ChainMap
 dict_1={'a': 15, 'b': 10}
 dict_2={'c': 18,'d': 20}
-dict_3 = ChainMap(dict_1, dict_2)
-print(dict(dict_3))
+merged_dict = ChainMap(dict_1, dict_2)
+print(dict(merged_dict))
 ```
 
 The above code will give the following result
 
 ```python
- {'a': 15, 'b': 10, 'c': 18, 'd': 20}
+{'c': 18, 'd': 20, 'a': 15, 'b': 10}
 ```
