@@ -1,5 +1,5 @@
 const siteMetadata = {
-  title: `Ismail Tlemcani's blog`,
+  title: `Ismail Tlemcani - Software developer`,
   author: 'Ismail Tlemcani',
   headerTitle: 'Ismail Tlemcani',
   description: '',
