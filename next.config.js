@@ -53,6 +53,9 @@ module.exports = {
   eslint: {
     dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],
   },
+  experimental: {
+    newNextLinkBehavior: false,
+  },
   async headers() {
     return [
       {
