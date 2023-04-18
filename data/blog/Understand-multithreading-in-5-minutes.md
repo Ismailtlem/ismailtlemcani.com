@@ -1,6 +1,6 @@
 ---
-title: Introduction to Multithreading in Python
-date: '2023-04-10'
+title: Understand Multithreading in Python in less than 5 minutes
+date: '2023-04-18'
 tags: ['python', 'multithreading', 'concurrent-mode']
 draft: false
 summary: 'Multithreading in Python in simple terms'
@@ -12,21 +12,19 @@ In this article, We'll try to understand multithreading in very simple terms
 
 Let us explain a bit more few terms before going deeper
 
-- A program is simply a sequence of statements that have the objective to perform some task. A program is usually stored on the disk
+- A program is simply a sequence of statements that has the objective to perform some task. A program is usually stored on the disk
 - A process is a running instance of a program along with all the resources it needs to operate. It has its own memory space.
-- A thread is a sequence of code that is executed within the scope of a process. You can have multiple threads running in a single process.
-
-![single-thread](/static/images/single-thread.png)
+- A thread is a sequence of instructions within a program that can be executed independently by a computer's CPU. A program can have multiple threads running at the same time, each performing a specific task
 
 ## What is multithreading ?
 
-Multithreading simply is a powerful technique that allows a program to execute multiple tasks concurrently. When a program is executed, it runs in a single thread by default. However, with multithreading, a program can create multiple threads that can execute different parts of the program simultaneously. This can improve performance by utilizing the available processing power more efficiently.
+Multithreading simply is a powerful technique that allows a program to execute multiple tasks concurrently. When a python program is executed, it runs in a single thread by default. However, with multithreading, a program can create multiple threads that can execute different parts of the program simultaneously. This can improve performance by utilizing the available processing power more efficiently.
 
 ![multi-thread](/static/images/multi-thread.png)
 
 ## How to implement multithreading ?
 
-Multithreading is implemented in Python by using the built-in library threading. First, you need to import the threading module. Then, you can create a new thread by creating an instance of the Thread class and you have to pass in a target function as an argument. Here is a simple example :
+Multithreading is implemented in Python by using the built-in library threading. First, you need to import the threading module. Then, you can create a new thread by creating an instance of the Thread class. Here is a simple example :
 
 ```python
 import threading
@@ -40,7 +38,7 @@ my_thread = threading.Thread(target=my_function)
 my_thread.start()
 ```
 
-Here is a more elaborate example :
+Here is a more elaborate example of computing the factorial of a list of numbers using multithreading.
 
 ```python
 import threading
@@ -71,13 +69,11 @@ for thread in threads:
 print("All factorials calculated!")
 ```
 
-- **Thread class constructor arguments**
-  As seen in the example above, when creating a thread instance, we usually have to specify the following arguments :
+**Steps to follow to implement multithreading**
 
-  - target : It is used to specify the function to run when the thread is started.
-  - args : It is simply the argument to pass to the target function. We are in this example passing 1 as an argument.
-
-- **Wait for a Thread to complete :** Can be done with .`join()` function
+- Create thread by creating an instance of the `Thread` class. Each thread should be tagged to a Python function with the arguments to pass to that function
+- Start task execution with `start()`
+- Wait for thread to complete execution with `join()`. In the above example, we waited for all the threads to finish before printing the message **All factorials calculated!**
 
 ### Final notes
 
