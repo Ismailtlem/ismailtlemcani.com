@@ -8,8 +8,7 @@
     "clean": "rm -rf .next .turbo",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next",
-    "start": "next start",
-    "vercel-build": "yarn workspace nextra run build && yarn workspace nextra-theme-docs run build && yarn build"
+    "start": "next start"
   },
   "dependencies": {
     "@vercel/analytics": "^1.0.1",
