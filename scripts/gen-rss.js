@@ -3,7 +3,7 @@ const path = require('path')
 const RSS = require('rss')
 const matter = require('gray-matter')
 
-async function generate() {
+async function generate () {
   const feed = new RSS({
     title: 'Ismail Tlemcani',
     site_url: 'https://localhost:3000/',

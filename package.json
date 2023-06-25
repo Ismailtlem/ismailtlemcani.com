@@ -8,7 +8,9 @@
     "clean": "rm -rf .next .turbo",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint .",
+    "lint-and-fix": "eslint . --fix"
   },
   "dependencies": {
     "@vercel/analytics": "^1.0.1",
@@ -25,5 +27,13 @@
     "nextra-theme-blog": {
       "injected": true
     }
+  },
+  "devDependencies": {
+    "eslint": "^8.43.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2"
   }
 }

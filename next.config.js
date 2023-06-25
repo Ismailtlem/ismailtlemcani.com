@@ -1,15 +1,15 @@
-const withNextra = require("nextra")({
-  theme: "nextra-theme-blog",
-  themeConfig: "./theme.config.jsx",
+const withNextra = require('nextra')({
+  theme: 'nextra-theme-blog',
+  themeConfig: './theme.config.jsx',
   staticImage: true,
   defaultShowCopyCode: true,
-  readingTime: true,
-});
+  readingTime: true
+})
 module.exports = withNextra({
   reactStrictMode: true,
   cleanDistDir: true,
 
   images: {
-    unoptimized: true,
-  },
-});
+    unoptimized: true
+  }
+})
