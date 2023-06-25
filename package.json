@@ -1,5 +1,5 @@
 {
-  "name": "Isma-blog",
+  "name": "Ismailtlem-blog",
   "license": "MIT",
   "private": true,
   "main": "index.js",
@@ -12,6 +12,7 @@
     "vercel-build": "yarn workspace nextra run build && yarn workspace nextra-theme-docs run build && yarn build"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.0.1",
     "next": "^13.4.6",
     "nextra": "^2.8.0",
     "nextra-theme-blog": "2.8.0",
