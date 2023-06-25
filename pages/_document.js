@@ -1,37 +1,30 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
-//test
-class MyDocument extends Document {
-  render() {
-    return (
-      <Html lang="en" className="scroll-smooth">
-        <Head>
-          <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/static/favicons/favicon-32x32.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/static/favicons/favicon-16x16.png"
-          />
-          <link rel="manifest" href="/static/favicons/site.webmanifest" />
-          <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
-          <meta name="msapplication-TileColor" content="#000000" />
-          <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
-          <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
-          <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-        </Head>
-        <body className="bg-white text-black antialiased dark:bg-gray-900 dark:text-white">
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    )
-  }
-}
+import { Html, Head, Main, NextScript } from "next/document";
 
-export default MyDocument
+export default function Document() {
+  const meta = {
+    title: "Ismail Tlemcani - Software developer",
+    description: "Clone and deploy your own Next.js portfolio in minutes.",
+    image: "https://assets.vercel.com/image/upload/q_auto/front/vercel/dps.png",
+  };
+
+  return (
+    <Html lang="en">
+      <Head>
+        <meta name="robots" content="follow, index" />
+        <meta name="description" content={meta.description} />
+        {/* <meta property="og:site_name" content={meta.title} /> */}
+        <meta property="og:description" content={meta.description} />
+        <meta property="og:image" content={meta.image} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@yourname" />
+        <meta name="twitter:title" content={meta.title} />
+        <meta name="twitter:description" content={meta.description} />
+        <meta name="twitter:image" content={meta.image} />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
+}

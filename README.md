@@ -16,4 +16,4 @@ visit http://localhost:3000/
 
 ## Credit
 
-This is based on timlrx's blog starter : https://github.com/timlrx/tailwind-nextjs-starter-blog
+This is based on Next.js portfolio starter. : https://github.com/vercel/nextjs-portfolio-starter

@@ -1,29 +1,27 @@
-import '@/css/tailwind.css'
-import '@/css/prism.css'
-import { Analytics } from '@vercel/analytics/react'
+import "nextra-theme-blog/style.css";
+import Head from "next/head";
 
-import { ThemeProvider } from 'next-themes'
-import Head from 'next/head'
+import "../styles/main.css";
 
-import siteMetadata from '@/data/siteMetadata'
-import LayoutWrapper from '@/components/LayoutWrapper'
-import dynamic from 'next/dynamic'
-const { ClientReload } = dynamic(() => import('@/components/ClientReload'))
-
-const isDevelopment = process.env.NODE_ENV === 'development'
-const isSocket = process.env.SOCKET
-
-export default function App({ Component, pageProps }) {
+export default function Nextra({ Component, pageProps }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
+    <>
       <Head>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="RSS"
+          href="/feed.xml"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Inter-roman.latin.var.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
       </Head>
-      {isDevelopment && isSocket && <ClientReload />}
-      <LayoutWrapper>
-        <Component {...pageProps} />
-        <Analytics />
-      </LayoutWrapper>
-    </ThemeProvider>
-  )
+      <Component {...pageProps} />
+    </>
+  );
 }
