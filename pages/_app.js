@@ -1,11 +1,11 @@
-import React from 'react'
-import { Analytics } from '@vercel/analytics/react'
-import 'nextra-theme-blog/style.css'
-import Head from 'next/head'
+import React from "react";
+import { Analytics } from "@vercel/analytics/react";
+import "nextra-theme-blog/style.css";
+import Head from "next/head";
 
-import '../styles/main.css'
+import "../styles/main.css";
 
-export default function Nextra ({ Component, pageProps }) {
+export default function Nextra({ Component, pageProps }) {
   return (
     <>
       <Head>
@@ -26,5 +26,5 @@ export default function Nextra ({ Component, pageProps }) {
       <Analytics />
       <Component {...pageProps} />
     </>
-  )
+  );
 }
