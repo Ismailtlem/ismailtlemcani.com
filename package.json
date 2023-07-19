@@ -9,7 +9,7 @@
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "next lint",
     "lint-and-fix": "eslint . --fix"
   },
   "dependencies": {
@@ -29,11 +29,8 @@
     }
   },
   "devDependencies": {
-    "eslint": "^8.43.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^16.0.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.32.2"
+    "eslint": "^8.45.0",
+    "eslint-config-next": "13.4.10",
+    "eslint-config-prettier": "^8.8.0"
   }
 }
