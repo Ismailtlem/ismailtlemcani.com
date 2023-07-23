@@ -5,10 +5,6 @@ export default {
       <h1
         style={{
           color: "rgb(0, 191, 255)",
-          // WebkitBackgroundClip: "text",
-          // WebkitTextFillColor: "transparent",
-          // backgroundClip: "text",
-          // backgroundImage: "linear-gradient(90deg,#7928CA,#FF0080)",
         }}
       >
         {children}
@@ -17,7 +13,7 @@ export default {
   },
   head: ({ meta }) => (
     <>
-      <title>Ismail Tlemcani - Developer</title>
+      <title>Ismail Tlemcani - Software Developer</title>
       {meta.description && (
         <meta name="description" content={meta.description} />
       )}
