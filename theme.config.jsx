@@ -13,7 +13,7 @@ export default {
   },
   head: ({ meta }) => (
     <>
-      <title>Ismail Tlemcani - Software Developer</title>
+      <title>Ismail Tlemcani - Software developer</title>
       {meta.description && (
         <meta name="description" content={meta.description} />
       )}
