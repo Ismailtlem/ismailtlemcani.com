@@ -1,6 +1,6 @@
 ---
 title: Easily configure Prettier with ESLint
-date: "2023-07-16"
+date: "2023-07-23"
 tags: ["ESLint", "JavaScript", "nodejs", "Prettier", "formatting"]
 draft: false
 description: "How to configure Prettier and ESLint easily"
@@ -26,7 +26,7 @@ To do so, it's very simple :
 npm i eslint-config-prettier eslint-plugin-prettier --save-dev
 ```
 
-- Next, you just need to add `plugin:Prettier/recommended` as the last extension in your `.eslintrc` file and you're done
+- Next, you just need to add `plugin:prettier/recommended` as the last extension in your `.eslintrc` file and you're done
 
 ## Example ?
 
