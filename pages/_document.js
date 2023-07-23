@@ -5,7 +5,7 @@ export default function Document() {
   const meta = {
     title: "Ismail Tlemcani - Software developer",
     description: "",
-    image: "",
+    image: "https://www.marclittlemore.com/images/posts/vercel-logo.jpg",
   };
 
   return (
