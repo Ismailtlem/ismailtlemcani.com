@@ -12,7 +12,6 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <meta name="robots" content="follow, index" />
-        <meta name="description" content={meta.description} />
         <meta property="og:description" content={meta.description} />
         <meta property="og:image" content={meta.image} />
       </Head>
