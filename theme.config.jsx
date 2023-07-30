@@ -53,7 +53,7 @@ export default {
     {
       name: "Linkedin",
       url: "https://www.linkedin.com/in/ismailtlemcani/",
-    }
+    },
   ],
   readMore: "Read More →",
 };
