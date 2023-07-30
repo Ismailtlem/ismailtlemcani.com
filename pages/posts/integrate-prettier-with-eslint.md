@@ -1,7 +1,7 @@
 ---
 title: Easily configure Prettier with ESLint
 date: "2023-07-23"
-tags: ["ESLint", "JavaScript", "nodejs", "Prettier", "formatting"]
+tag: [ESLint, JavaScript, nodejs, Prettier, formatting]
 draft: false
 description: "How to configure Prettier and ESLint easily"
 ---
@@ -33,8 +33,8 @@ npm i eslint-config-prettier eslint-plugin-prettier --save-dev
 For the following simple JavaScript file
 
 ```javascript
-var name = 'Ismail Tlemcani'
-console.log(name)
+var name = "Ismail Tlemcani";
+console.log(name);
 ```
 
 If you have Prettier configured to work with ESLint, running ESLint will give the following output :

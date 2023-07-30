@@ -1,13 +1,13 @@
 ---
-title: "The Clean Code Book for Javascript Developers: A Quick Summary"
+title: "The Clean Code Book for JavaScript Developers: A Quick Summary"
 date: "2021-07-22"
-tags:
+tag:
   [
-    "software-development",
-    "software-engineering",
-    "clean-code",
-    "JavaScript",
-    "robert-c-martin",
+    software-development,
+    software-engineering,
+    clean-code,
+    JavaScript,
+    robert-c-martin,
   ]
 draft: false
 description: "Blog post summarizing the book “Clean Code” written by Robert Martin on how to write a readable and maintainable code."
@@ -22,7 +22,7 @@ We’ll use JavaScript to illustrate the rules and best practices of the book.
 
 [Clean code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) is a book written by the American software engineer and instructor Robert Martin, published in 2008.
 The book is about programming best practices gathered from years of experience in the industry in order to write good and clean code that can be easily maintainable in the long term.
-Even though the examples that the author uses in his book are in Java, the book's concepts remain relevant for Javascript and programming in general.
+Even though the examples that the author uses in his book are in Java, the book's concepts remain relevant for JavaScript and programming in general.
 
 ## Some words about the author
 

@@ -1,15 +1,7 @@
 ---
 title: Taking A Glance At Software Testing, In Particular E2E Web Apps Testing
 date: "2021-04-16"
-tags:
-  [
-    "testing",
-    "Cypress",
-    "react",
-    "web-development",
-    "code-quality",
-    "JavaScript",
-  ]
+tag: [testing, Cypress, react, web-development, code-quality, JavaScript]
 draft: false
 description: "Software testing from a very simple perspective and in particular, end to end testing for web applications"
 ---

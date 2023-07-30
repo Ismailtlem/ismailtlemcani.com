@@ -1,7 +1,7 @@
 ---
 title: 4 simple ways to merge dictionaries in Python
 date: "2023-01-29"
-tags: ["Python", "dictionaries", "beginners"]
+tag: [python, dictionaries, beginners]
 draft: false
 description: "How you can merge your Python dictionnaries in one line"
 ---

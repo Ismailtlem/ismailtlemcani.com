@@ -1,8 +1,7 @@
 ---
 title: "Performance Tests on Common JavaScript Array Methods"
 date: "2022-03-19"
-tags:
-  ["JavaScript", "web-development", "software-development", "arrays", "lists"]
+tag: [JavaScript, web-development, software-development, arrays, lists]
 draft: false
 description: "Which of the JavaScript array methods is the fastest to loop through an array ? "
 ---

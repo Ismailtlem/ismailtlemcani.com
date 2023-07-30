@@ -1,7 +1,7 @@
 ---
 title: Best Tools For Building Your First MERN Application
 date: "2021-01-12"
-tags: ["react", "JavaScript", "nodejs", "mongodb", "expressjs", "beginners"]
+tag: [react, JavaScript, nodejs, mongodb, expressjs, beginners]
 draft: false
 description: "Top tools to use to build your first web application using the MERN stack"
 ---

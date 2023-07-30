@@ -1,9 +1,9 @@
 ---
-title: 'Quick Tips For Migrating from JavaScript to TypeScript'
-date: '2021-11-02'
-tags: ['TypeScript', 'web-development', 'react', 'JavaScript']
+title: "Quick Tips For Migrating from JavaScript to TypeScript"
+date: "2021-11-02"
+tag: [TypeScript, web-development, react, JavaScript]
 draft: false
-description: 'Some useful tips to keep in mind when migrating your JavaScript project to TypeScript'
+description: "Some useful tips to keep in mind when migrating your JavaScript project to TypeScript"
 ---
 
 ![javascript-to-typescript](/images/javascript-to-typescript.png)
@@ -32,7 +32,7 @@ This prevents the program from having any unexpected behaviors and ensures that 
 In TypeScript, you can assign types to the declared variables in the following way :
 
 ```typescript
-let firstName: string = 'ismail'
+let firstName: string = "ismail";
 ```
 
 You can see more details about TypeScript and types in TypeScript on their very [good official documentation](https://www.typescriptlang.org/docs/)
@@ -103,10 +103,10 @@ As we previously mentioned, one big advantage of using TypeScript is assigning t
 
 ```typescript
 function computeGlobalGrade(studentName: string | undefined | null) {
-  const nameOne: string = studentName
+  const nameOne: string = studentName;
   // Typescript will complain that the student name might be null and cannot be assigned to a string
 
-  const nameTwo: string = studentName!
+  const nameTwo: string = studentName!;
   // compiles fine because you tell compiler that null | undefined are excluded
 }
 ```
@@ -119,18 +119,18 @@ const propTypes = {
   i18nCertText: PropTypes.string,
   isProjectsCompleted: PropTypes.bool,
   steps: PropTypes.string,
-  superBlock: PropTypes.string
-}
+  superBlock: PropTypes.string,
+};
 ```
 
 You can convert that using either an interface in your TypeScript file as shown below
 
 ```typescript
 interface ClaimCertStepsProps {
-  i18nCertText: string
-  isProjectsCompleted: boolean
-  steps: string
-  superBlock: string
+  i18nCertText: string;
+  isProjectsCompleted: boolean;
+  steps: string;
+  superBlock: string;
 }
 ```
 
@@ -138,11 +138,11 @@ or using the type keyword as shown below
 
 ```typescript
 type ClaimCertStepsProps = {
-  i18nCertText: string
-  isProjectsCompleted: boolean
-  steps: string
-  superBlock: string
-}
+  i18nCertText: string;
+  isProjectsCompleted: boolean;
+  steps: string;
+  superBlock: string;
+};
 ```
 
 and then use that in your component in the following way
@@ -152,10 +152,10 @@ const ClaimCertSteps = ({
   isProjectsCompleted,
   i18nCertText,
   steps,
-  superBlock
+  superBlock,
 }: ClaimCertStepsProps): JSX.Element => {
   // code of the component
-}
+};
 ```
 
 ### Adding a List of Properties To an Object
@@ -163,9 +163,9 @@ const ClaimCertSteps = ({
 One typical block of code we find in JavaScript programs is dynamically adding properties to an object like so
 
 ```javascript
-let students = {}
-students.name = 'ismail'
-students.age = 15
+let students = {};
+students.name = "ismail";
+students.age = 15;
 ```
 
 If you use the same code in TypeScript, the compiler will complain that the name and age properties does not exist on the students variable which has the type {}.
@@ -174,23 +174,23 @@ To get rid of that error, you can define the properties inside the object like s
 
 ```typescript
 let student = {
-  name: 'ismail',
-  age: 15
-}
+  name: "ismail",
+  age: 15,
+};
 ```
 
 Or you can define the types of the properties in a separate interface like so :
 
 ```typescript
 interface SudentProperties {
-  name?: string
-  age?: number
+  name?: string;
+  age?: number;
 }
 
-let student: SudentProperties = {}
+let student: SudentProperties = {};
 
-student.name = 'ismail'
-student.age = 15
+student.name = "ismail";
+student.age = 15;
 ```
 
 ## Final words

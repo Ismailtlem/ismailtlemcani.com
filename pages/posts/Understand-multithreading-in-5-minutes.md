@@ -1,7 +1,7 @@
 ---
 title: Understand Multithreading in Python in less than 5 minutes
 date: "2023-04-18"
-tags: ["python", "multithreading", "concurrent-mode"]
+tag: [python, multithreading, concurrent-mode]
 draft: false
 description: "Multithreading in Python in simple terms"
 ---

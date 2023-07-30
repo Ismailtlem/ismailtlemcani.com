@@ -1,14 +1,14 @@
 ---
 title: "Top 3 Free Resources to Learn Django in 2023"
 date: "2022-12-30"
-tags:
+tag:
   [
-    "django",
-    "python",
-    "web-development",
-    "learn-to-code",
-    "software-development",
-    "software-engineering",
+    django,
+    python,
+    web-development,
+    learn-to-code,
+    software-development,
+    software-engineering,
   ]
 draft: false
 description: "Introduction to the Django Framework and a handpicked list of free resources to learn this framework"
