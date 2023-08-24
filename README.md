@@ -16,4 +16,4 @@ visit http://localhost:3000/
 
 ## Credit
 
-This is based on Next.js portfolio starter. : https://github.com/vercel/nextjs-portfolio-starter
+This is based on Hunter Chang starter. : https://github.com/ChangoMan/nextjs-typescript-mdx-blog
