@@ -1,27 +1,27 @@
-import { Providers } from '@/app/providers'
-import { Container } from '@/components/Container'
-import { Navigation } from '@/components/Navigation'
-import ThemeSwitch from '@/components/ThemeSwitch'
-import { WEBSITE_HOST_URL } from '@/lib/constants'
-import clsx from 'clsx'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import Link from 'next/link'
-import './globals.css'
+import { Analytics } from "@vercel/analytics/react";
+import { Providers } from "@/app/providers";
+import { Container } from "@/components/Container";
+import { Navigation } from "@/components/Navigation";
+import ThemeSwitch from "@/components/ThemeSwitch";
+import { WEBSITE_HOST_URL } from "@/lib/constants";
+import clsx from "clsx";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import Link from "next/link";
+import "./globals.css";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 const meta = {
-  title: 'Ismail Tlemcani - Software Developer',
-  description:
-    'Software Developer, continuous learner',
+  title: "Ismail Tlemcani - Software Developer",
+  description: "Software Developer, continuous learner",
   image: `images/profil-image.png`,
-}
+};
 
 export const metadata: Metadata = {
   title: {
     default: meta.title,
-    template: '%s | Hunter Chang',
+    template: "%s | Hunter Chang",
   },
   description: meta.description,
   openGraph: {
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
     description: meta.description,
     url: WEBSITE_HOST_URL,
     siteName: meta.title,
-    locale: 'en-US',
-    type: 'website',
+    locale: "en-US",
+    type: "website",
     images: [
       {
         url: meta.image,
@@ -41,21 +41,19 @@ export const metadata: Metadata = {
     title: meta.title,
     description: meta.description,
     images: meta.image,
-    card: 'summary_large_image',
+    card: "summary_large_image",
   },
   alternates: {
     canonical: WEBSITE_HOST_URL,
   },
-}
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout(
+  { children }: { children: React.ReactNode },
+) {
   return (
     <html lang="en">
-      <body className={clsx(inter.className, 'bg-zinc-50 dark:bg-gray-900')}>
+      <body className={clsx(inter.className, "bg-zinc-50 dark:bg-gray-900")}>
         <Providers>
           <header className="py-4">
             <Container>
@@ -66,12 +64,15 @@ export default function RootLayout({
             </Container>
           </header>
           <main>
-            <Container>{children}</Container>
+            <Container>
+              {children}
+              <Analytics />
+            </Container>
           </main>
           <footer className="py-16">
             <Container>
               <p>
-                Built by{' '}
+                Built by{" "}
                 <Link href="https://twitter.com/ismailtlem">
                   Ismail Tlemcani
                 </Link>
@@ -81,5 +82,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-  )
+  );
 }
