@@ -78,7 +78,6 @@ export default function Home({ params }: { params: { page: string } }) {
   return (
     <>
       <div className="mt-10 space-y-12 border-t border-gray-200 pt-10 dark:border-gray-700">
-        {console.log(pagination)}
         {displayPosts.map((post, idx) => (
           <PostCard key={idx} {...post} />
         ))}
