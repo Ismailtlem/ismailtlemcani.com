@@ -15,7 +15,7 @@ const inter = Inter({ subsets: ["latin"] });
 const meta = {
   title: "Ismail Tlemcani - Software Developer",
   description: "Software Developer, continuous learner",
-  image: `images/profil-image.png`,
+  image: `${WEBSITE_HOST_URL}/og-preview.jpg`,
 };
 
 export const metadata: Metadata = {
@@ -48,9 +48,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout(
-  { children }: { children: React.ReactNode },
-) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body className={clsx(inter.className, "bg-zinc-50 dark:bg-gray-900")}>
