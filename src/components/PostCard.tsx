@@ -1,13 +1,13 @@
-import { Post } from 'contentlayer/generated'
-import { format, parseISO } from 'date-fns'
-import Link from 'next/link'
+import { Post } from "contentlayer/generated";
+import { format, parseISO } from "date-fns";
+import Link from "next/link";
 
 export function PostCard(post: Post) {
   return (
     <article className="flex flex-col items-start justify-between">
       <div className="flex items-center gap-x-4 text-xs">
         <time dateTime={post.date}>
-          {format(parseISO(post.date), 'LLLL d, yyyy')}
+          {format(parseISO(post.date), "LLLL d, yyyy")}
         </time>
       </div>
       <div className="group relative">
@@ -17,10 +17,10 @@ export function PostCard(post: Post) {
             {post.title}
           </Link>
         </h3>
-        <p className="mt-5 line-clamp-3 text-sm leading-6">
+        <p className="mt-5 line-clamp-3 text-base leading-6">
           {post.description}
         </p>
       </div>
     </article>
-  )
+  );
 }

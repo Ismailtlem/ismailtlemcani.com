@@ -22,6 +22,10 @@
 
 /* Post styles */
 
+.prose p {
+  font-size: large
+}
+
 .prose .anchor {
   @apply absolute invisible no-underline;
 
