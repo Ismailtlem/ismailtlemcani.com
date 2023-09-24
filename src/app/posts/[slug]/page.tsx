@@ -29,13 +29,13 @@ export async function generateMetadata({
   return {
     title: title,
     description: description,
-    image: image,
     openGraph: {
-      title,
-      description,
+      title: title,
+      description: description,
       type: "article",
       publishedTime: date,
       url: `${WEBSITE_HOST_URL}/posts/${url}`,
+      images: [image],
     },
     twitter: {
       title,

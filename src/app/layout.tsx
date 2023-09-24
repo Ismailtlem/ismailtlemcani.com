@@ -15,14 +15,11 @@ const inter = Inter({ subsets: ["latin"] });
 const meta = {
   title: "Ismail Tlemcani - Software Developer",
   description: "Software Developer, continuous learner",
-  image: `${WEBSITE_HOST_URL}/images/favicon.ico`,
+  image: `${WEBSITE_HOST_URL}/favicon.ico`,
 };
 
 export const metadata: Metadata = {
-  title: {
-    default: meta.title,
-    template: "%s | Hunter Chang",
-  },
+  title: meta.title,
   description: meta.description,
   openGraph: {
     title: meta.title,
@@ -31,11 +28,7 @@ export const metadata: Metadata = {
     siteName: meta.title,
     locale: "en-US",
     type: "website",
-    images: [
-      {
-        url: meta.image,
-      },
-    ],
+    images: meta.image,
   },
   twitter: {
     title: meta.title,

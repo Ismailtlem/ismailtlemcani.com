@@ -3,7 +3,8 @@
 import { PostCard } from "@/components/PostCard";
 import { allPosts } from "contentlayer/generated";
 import { compareDesc } from "date-fns";
-
+import type { Metadata } from "next";
+import { WEBSITE_HOST_URL } from "@/lib/constants";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -57,6 +58,35 @@ function Pagination({ totalPages, currentPage }) {
       </nav>
     </div>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata | undefined> {
+  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
+
+  if (!post) {
+    return;
+  }
+
+  const { title, description, date, image, url } = post;
+  return {
+    title: title,
+    description: description,
+    openGraph: {
+      title: title,
+      description: description,
+      type: "article",
+      publishedTime: date,
+      images: [image],
+    },
+    twitter: {
+      title,
+      description,
+    },
+  };
 }
 
 export default function Home({ params }: { params: { page: string } }) {
