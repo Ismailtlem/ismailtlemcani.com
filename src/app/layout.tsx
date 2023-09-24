@@ -15,7 +15,7 @@ const inter = Inter({ subsets: ["latin"] });
 const meta = {
   title: "Ismail Tlemcani - Software Developer",
   description: "Software Developer, continuous learner",
-  image: `${WEBSITE_HOST_URL}/og-preview.jpg`,
+  image: `${WEBSITE_HOST_URL}/images/favicon.ico`,
 };
 
 export const metadata: Metadata = {
