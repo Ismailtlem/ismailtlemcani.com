@@ -19,7 +19,7 @@ In this article, we'll see a python performance tip to avoid in your code. I fir
 
 ## Situation ?
 
-You have a hot loop in your code (a loop iterating over many items, and which can have a serious effect on the program's performance).
+You have a hot loop in your code (a loop iterating over many items like the one below, and which can have a serious effect on the program's performance).
 Should you call a function inside this loop ? **Better no**. It's also what Guido van Rossum has suggested [in this post](https://web.archive.org/web/20180919031245/https://plus.google.com/115212051037621986145/posts/HajXHPGN752) for writing faster Python
 
 ```python
