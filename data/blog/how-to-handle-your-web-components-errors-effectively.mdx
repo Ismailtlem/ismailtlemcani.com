@@ -1,6 +1,6 @@
 ---
-title: "How to Handle Your Web Components Errors Effectively"
-date: "2022-11-08"
+title: 'How to Handle Your Web Components Errors Effectively'
+date: '2022-11-08'
 tags:
   [
     'error-handling',
@@ -12,7 +12,7 @@ tags:
   ]
 draft: false
 summary: Overview on how to effectively handle errors in web components and the recommended way to do it in the React ecosystem
-images: ["/static/images/react-usual-error.png"]
+images: ['/static/images/react-usual-error.png']
 ---
 
 <Image
@@ -44,7 +44,7 @@ From React 16 onward, as stated in [the official documentation](https://reactjs.
 
 <Image
   alt={`React-component-error-tree`}
-  src={`/images/react-component-error-tree.png`}
+  src={`/static/images/react-component-error-tree.png`}
   width={1440}
   height={960}
   priority
@@ -61,7 +61,7 @@ In addition to that, the component stack trace is also provided. We can therefor
 
 <Image
   alt={`component-stack-trace`}
-  src={`/images/component-stack-trace.png`}
+  src={`/static/images/component-stack-trace.png`}
   width={1440}
   height={960}
   priority
@@ -100,7 +100,7 @@ Instead, the error propagation will stop at the Error Boundary level
 
 <Image
   alt={`react-boundary-tree`}
-  src={`/images/react-boundary-tree.png`}
+  src={`/static/images/react-boundary-tree.png`}
   width={1440}
   height={960}
   priority
@@ -127,33 +127,33 @@ As we previously mentioned, an error boundary is just a class component that imp
 Here is a simple React app where we are explicitly throwing an error in the Users component below
 
 ```javascript
-import { Users } from "./Users";
+import { Users } from './Users'
 function App() {
   return (
     <div className="App">
       <h1>Hello dear reader</h1>
       <Users />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
 ```
 
 Here is the Users component where we are explicitly throwing an error
 
 ```javascript
 export const Users = () => {
-  throw new Error("Error!");
-  return <div> Users </div>;
-};
+  throw new Error('Error!')
+  return <div> Users </div>
+}
 ```
 
 Running this React app will throw the following error and cause the entire app to crash
 
 <Image
   alt={`Javascript-error`}
-  src={`/images/javascript-error.png`}
+  src={`/static/images/javascript-error.png`}
   width={1440}
   height={960}
   priority
@@ -162,28 +162,28 @@ Running this React app will throw the following error and cause the entire app t
 To prevent the app from entirely crashing, we need to add the Error Boundary component. Here is a simple implementation of an error boundary class
 
 ```javascript
-import React from "react";
+import React from 'react'
 
 export class ErrorBoundary extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { hasError: false };
+    super(props)
+    this.state = { hasError: false }
   }
 
   static getDerivedStateFromError(error) {
-    return { hasError: true };
+    return { hasError: true }
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error(error, errorInfo);
+    console.error(error, errorInfo)
   }
 
   render() {
     if (this.state.hasError) {
-      return <h1>Something went wrong.</h1>;
+      return <h1>Something went wrong.</h1>
     }
 
-    return this.props.children;
+    return this.props.children
   }
 }
 ```
@@ -211,7 +211,7 @@ The app now runs but the error propagation stops at the Error Boundary component
 
 <Image
   alt={`Output-react-app`}
-  src={`/images/output-react-app.png`}
+  src={`/static/images/output-react-app.png`}
   width={1440}
   height={960}
   priority
@@ -236,9 +236,9 @@ yarn add react-boundary-library
 - To handle errors using this library, you can do it simply by wrapping the component where your error might show up inside the **ErrorBoundary** component from **react-boundary-library**. You can also provide a fallback component as a prop to the Error Boundary component which will be the UI shown in case of an error. Here is a concrete example
 
 ```javascript
-import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundary } from 'react-error-boundary'
 
-import { Users } from "./Users";
+import { Users } from './Users'
 
 function ErrorFallback({ error, resetErrorBoundary }) {
   return (
@@ -247,7 +247,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
       <p>{error.message}</p>
       <button onClick={resetErrorBoundary}>Try again</button>
     </div>
-  );
+  )
 }
 
 function App() {
@@ -258,7 +258,7 @@ function App() {
         <Users />
       </ErrorBoundary>
     </div>
-  );
+  )
 }
 ```
 
@@ -269,7 +269,7 @@ function App() {
 
 <Image
   alt={`Error-output`}
-  src={`/images/error-output.png`}
+  src={`/static/images/error-output.png`}
   width={1440}
   height={960}
   priority
