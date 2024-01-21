@@ -1,0 +1,124 @@
+---
+title: 'Using TYPE_CHECKING constant in python'
+date: '2024-01-21'
+tags: ['python', 'typing', 'beginners']
+draft: false
+summary: Top tools to use to build your first web application using the MERN stack
+images: ['/static/images/type-checking.png']
+---
+
+<Image
+  alt={`type-checking`}
+  src={`/static/images/type-checking.png`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+Below is a small article in order to better understand the usage of the **TYPE_CHECKING** constant
+
+## Typing in Python ?
+
+As we know that Python is a dynamic language, which means it only checks the types of the variables you specified at runtime. But we can add type hints to a Python code, and it's more and more used.
+The benefits of doing so are :
+
+- Documentation code and code readability.
+- Data validation by using tools like Pydantic
+- Catching bugs related to the types of variables early with the help of tools like mypy
+
+Type hints are not necessary, and some Python programmers still prefer to not use them, but I do think it's a good habit to have and it's even officially encouraged because of
+the gradual integration of python types like _list_ and _dict_ in recent Python versions.
+
+## TYPE_CHECKING constant ?
+
+It's a constant defined in the _typing_ module that is **False** at runtime and **True** while type checking with a type checker like mypy.
+We usually put the code that we don't want to be executed at run time inside _if TYPE_CHECKING:_ condition
+
+## When should we use that ?
+
+Since code inside if TYPE_CHECKING: is not executed at runtime, this is a convenient way to send some information to the type checker without the code being evaluated at runtime. This is most useful for resolving circular import errors.
+
+## Example ?
+
+Consider this file _a.py_
+
+```python
+from b import B
+
+
+def f(b: B) -> None:
+    b.say_hello()
+
+
+def g() -> None:
+    print("hello world from g")
+```
+
+and this file _b.py_
+
+```python
+from a import g
+
+import sys
+
+
+class B:
+    def say_hello(self) -> None:
+        g()
+
+
+if __name__ == "__main__":
+    b = B()
+    b.say_hello()
+    sys.exit()
+```
+
+Running the b.py file will result in a circular import error
+
+<Image
+  alt={`circular-import`}
+  src={`/static/images/circular-import.png`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+## Using TYPE_CHECKING
+
+- First import TYPE_CHECKING constant from typing
+- If you are using python 3.6 and below, you can just enter the problematic type as a string
+
+```python
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from b import B
+
+
+def f(b: 'B') -> None:
+    b.say_hello()
+
+
+def g() -> None:
+    print("hello world from g")
+```
+
+- If you are using Python 3.7 and up, you can just import annotations from future module to resolve this:
+
+```python
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from b import B
+
+
+def f(b: B) -> None:
+    b.say_hello()
+
+
+def g() -> None:
+    print("hello world from g")
+```
+
+Running the _b.py_ file will now be successful and result in printing the sentence _hello world from g_
