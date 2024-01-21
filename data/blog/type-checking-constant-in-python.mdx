@@ -3,7 +3,7 @@ title: 'Using TYPE_CHECKING constant in python'
 date: '2024-01-21'
 tags: ['python', 'typing', 'beginners']
 draft: false
-summary: Top tools to use to build your first web application using the MERN stack
+summary: Learn the usage of TYPE_CHECKING constant in Python
 images: ['/static/images/type-checking.png']
 ---
 
@@ -15,11 +15,14 @@ images: ['/static/images/type-checking.png']
   priority
 />
 
-Below is a small article in order to better understand the usage of the **TYPE_CHECKING** constant
+Below is a small article in order to better understand the usage of the **TYPE_CHECKING** constant in Python
 
 ## Typing in Python ?
 
-As we know that Python is a dynamic language, which means it only checks the types of the variables you specified at runtime. But we can add type hints to a Python code, and it's more and more used.
+As we know that Python is a dynamic language, which means it only checks the types of the variables you specified at runtime.
+You can read more details about that in this very well written [article](https://vickiboykis.com/2023/12/11/why-if-type_checking/).
+
+But we can add type hints to a Python code, and it's more and more used.
 The benefits of doing so are :
 
 - Documentation code and code readability.
@@ -32,13 +35,15 @@ the gradual integration of python types like _list_ and _dict_ in recent Python 
 ## TYPE_CHECKING constant ?
 
 It's a constant defined in the _typing_ module that is **False** at runtime and **True** while type checking with a type checker like mypy.
-We usually put the code that we don't want to be executed at run time inside _if TYPE_CHECKING:_ condition
+We usually put the code that we don't want to be executed at runtime inside _if TYPE_CHECKING:_ condition
 
 ## When should we use that ?
 
-Since code inside if TYPE_CHECKING: is not executed at runtime, this is a convenient way to send some information to the type checker without the code being evaluated at runtime. This is most useful for resolving circular import errors.
+Since code inside if TYPE_CHECKING: is not executed at runtime, this is a convenient way to send some information to the type checker without the code being evaluated at runtime.
 
-## Example ?
+One usage of TYPE_CHECKING constant is resolving some circular import errors (module A imports module B and module B imports module A) caused by adding some type annotations
+
+### Example ?
 
 Consider this file _a.py_
 
