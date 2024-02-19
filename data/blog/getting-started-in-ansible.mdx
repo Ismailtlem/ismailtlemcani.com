@@ -1,0 +1,207 @@
+---
+title: 'DevOps journey step 1 : Getting started with Ansible'
+date: '2024-02-17'
+tags: ['python', 'ansible', 'devops']
+draft: false
+summary: First steps into Ansible
+images: ['/static/images/type-checking.png']
+---
+
+<Image alt={`ansible`} src={`/static/images/ansible.png`} width={1440} height={960} priority />
+
+## What is the problem that Ansible solves ?
+
+System administrators are often faced with repetitive tasks such as creating virtual machines, deploying applications, setting up configurations on those machines, ...
+All of these tasks involve execution of commands and scripts. That's where Ansible can help
+
+## What is Ansible ?
+
+Ansible is a powerful IT automation tool that can be used to automate IT processes usually performed manually, such as configuration management, application deployment and orchestration, ...
+
+## Ansible components
+
+The main components in Ansible are :
+
+- The **control node** : The host from where Ansible is run
+- The **managed nodes** : Those are the hosts on where the Ansible playbook will be run
+- **Inventory** : It is a configuration file containing information about the remote hosts and systems that you want to control. Inventory files are in INI or YAML format.
+  Here is an example of an inventory file
+
+```ini
+mail.example.com
+
+[webservers]
+foo.example.com
+bar.example.com
+
+[dbservers]
+one.example.com
+two.example.com
+three.example.com
+```
+
+- **Playbook** : Written in YAML format, a playbook describes a series of tasks that Ansible should perform on the managed nodes.
+
+  Here is an example of an Ansible playbook
+
+```yaml
+- name: Start Apache Service
+  hosts: node1
+  become: true
+  tasks:
+    - name: Start Apache service
+      service:
+        name: apache2
+        state: started
+```
+
+- **Tasks** : Those are the tasks that Ansible will perform on the managed nodes
+
+## Installing Ansible
+
+You'll need to install Ansible on just one node. From that node, Ansible can control an entire fleet of machines and devices remotely.
+To set up your control node, you can use any UNIX-like machine with Python installed.
+If you have pip installed, just install Ansible as you would normally install any python package as shown below
+
+```bash
+pip install ansible
+```
+
+You can check that Ansible is installed with
+
+```bash
+ansible --version
+```
+
+Here is what you will get
+
+<Image
+  alt={`ansible-version`}
+  src={`/static/images/ansible-version.png`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+## Start using Ansible : First commands
+
+You can start experimenting with Ansible with any remote host you want. For this article, I have set up an AWS EC2 instance
+
+<Image alt={`aws-ec2`} src={`/static/images/aws-ec2.png`} width={1440} height={960} priority />
+
+- The next step is creating the inventory file. Here is what it looks like in this example
+
+```ini
+[webservers]
+13.39.150.190
+```
+
+We can start using Ansible. We can ping that server by the following command
+
+```bash
+ansible -i inventory webservers -m ping -u ec2-user
+```
+
+Here is the output we get
+
+```bash
+[WARNING]: Platform linux on host 13.39.150.190 is using the discovered Python interpreter at /usr/bin/python3.9, but future installation of another Python interpreter could change
+the meaning of that path. See https://docs.ansible.com/ansible-core/2.15/reference_appendices/interpreter_discovery.html for more information.
+13.39.150.190 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.9"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+```
+
+## Playbooks
+
+The main component of Ansible are playbooks. It's where we write the tasks that we want to execute on the remote hosts.
+Here are, the important things to know about playbooks :
+
+- A playbook is a single YAML file containing a set of plays
+- A play has a set of tasks to be run on hosts
+- A task is an action to be run on the host. A task can be : Execute a command, run a script, install a package, shutdown or restart a service, ...
+
+Here is a simple example of a playbook that is just copying a file from the local machine to the remote host
+
+```yaml
+---
+- name: Copy a file
+  hosts: webservers
+  remote_user: ec2-user # Specify the user here
+  become: yes
+  tasks:
+    - name: Copy file
+      ansible.builtin.copy:
+        src: /home/ismail/Documents/test.txt
+        dest: /home/file.txt
+```
+
+To execute this playbook, just run this simple command
+
+```sh
+ansible-playbook -i inventory playbook.yml
+```
+
+Here is a more elaborate example of a playbook that is supposed to install Python 3.9 on that AWS EC2 instance
+
+```yaml
+---
+- name: Install Python 3.9
+  hosts: webservers
+  remote_user: ec2-user # Specify the user here
+  become: yes
+  tasks:
+    - name: Install required dependencies
+      yum:
+        name:
+          - gcc
+          - openssl-devel
+          - bzip2-devel
+          - libffi-devel
+          - zlib-devel
+          - readline-devel
+
+    - name: Download Python 3.9 source tarball
+      get_url:
+        url: 'https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tgz'
+        dest: '/tmp/Python-3.9.0.tgz'
+
+    - name: Extract Python source tarball
+      ansible.builtin.unarchive:
+        src: '/tmp/Python-3.9.0.tgz'
+        dest: '/tmp'
+        remote_src: yes
+
+    - name: Configure Python 3.9
+      command: >
+        ./configure --enable-optimizations
+      args:
+        chdir: '/tmp/Python-3.9.0'
+
+    - name: Make Python 3.9
+      command: >
+        make
+      args:
+        chdir: '/tmp/Python-3.9.0'
+
+    - name: Install Python 3.9
+      command: >
+        make altinstall
+      args:
+        chdir: '/tmp/Python-3.9.0'
+```
+
+## Go deeper : Good resources to learn Ansible
+
+Below is a handpicked list of resources to learn Ansible more in details.
+
+- Firstly, as with any technology, the first source you should check is the [official documentation](https://docs.ansible.com/ansible/latest/index.html).
+
+- A resource that I found very useful and that I am personally using is the learning website [kodekloud](https://kodekloud.com/)
+  (NB: I am not in any way associated or affiliated with them). The good thing about this website is that, in each course, you have exercices that represent some real world scenarios in real virtual lab environments
+
+- I also found this [youtube playlist](https://www.youtube.com/watch?v=goclfp6a2IQ&list=PL2_OBreMn7FqZkvMYt6ATmgC0KAGGJNAN&index=1) from Jeff Geerling to be a good resource. The youtuber is explaining in details every concept and you can follow and practice with him as you go through the videos
