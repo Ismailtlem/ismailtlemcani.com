@@ -1,0 +1,88 @@
+---
+title: 'Coding challenge: Get useful data from a 1b rows text file with Python'
+date: '2024-02-25'
+tags: ['python', 'performance', 'big-data', 'coding-challenge']
+draft: false
+summary: Can Python parse a 1B row text file ?
+images: ['/static/images/python-perf.jpg']
+---
+
+Lately, I participated in a coding challenge by the very awesome moroccan tech community (geeksblabla) in their annual tech online conference.
+Here is the link of the [coding challenge](https://github.com/geeksblabla/blanat)
+
+## What is the problem in a nutshell ?
+
+You have a 1 billion row text file that looks like this
+
+```text
+casa,tomato,6.23
+casa,tomato,7.23
+casa,tomato,8.23
+casa,tomato,9.23
+casa,potato,4.21
+casa,flour,6.24
+casa,oil,9.24
+casa,oil,9.94
+casa,oil,8.24
+```
+
+The first value is the name of the city, the second value is the name of the product, the third value is the price of the product.
+You have to get the name of the cheapest city and the total price of products in that city, separated by one space. On the following lines, you have to get the cheapest 5 products in that city
+You can see the README for examples.
+
+## Python solution
+
+```python
+from collections import defaultdict
+
+
+def read_large_file(file_path, chunk_size=1024 * 1024):
+    """Read input file by chunks"""
+
+    with open(file_path, "r", encoding="utf-8") as file:
+        while True:
+            chunk = file.readline(chunk_size)
+            if not chunk:
+                break
+            line = chunk.strip()
+            yield line
+
+
+def main(input_path, output_path):
+    """Main function"""
+
+    city_totals = defaultdict(float)
+    cheapest_city_products = defaultdict(set)
+    cheapest_city = ""
+    cheapest_total = float("inf")
+
+    for line in read_large_file(input_path):
+        city, product, price = line.split(",")
+        city_totals[city] += float(price)
+        if city_totals[city] < cheapest_total:
+            cheapest_total = city_totals[city]
+            cheapest_city = city
+            cheapest_city_products.clear()
+            cheapest_city_products.update({cheapest_city: set()})
+        if city == cheapest_city:
+            cheapest_city_products[cheapest_city].add((product, price))
+    top_products = sorted(
+        cheapest_city_products[cheapest_city], key=lambda x: (x[1], x[0])
+    )[:5]
+    output_lines = [f"{cheapest_city} {round(cheapest_total, 2)}"]
+    output_lines.extend([f"{product[0]} {product[1]}" for product in top_products])
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(output_lines))
+
+
+if __name__ == "__main__":
+    INPUT_FILE_PATH = "input.txt"
+    OUTPUT_FILE_PATH = "output.txt"
+    main(INPUT_FILE_PATH, OUTPUT_FILE_PATH)
+
+```
+
+The input file is _input.txt_. The output file is _output.txt_
+When running this script on a 1 billion row file with a size of approximatively 22 GB, the script could successfully produce the intended output.
+The time of execution was around **760 seconds ≈ 12.66 min**
