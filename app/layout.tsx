@@ -1,7 +1,7 @@
 import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
 
-import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { Space_Grotesk } from 'next/font/google'
 import { SearchProvider, SearchConfig } from 'pliny/search'
@@ -65,7 +65,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${space_grotesk.variable} scroll-smooth`}
       suppressHydrationWarning
     >
-
       <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png?v=2" />
       <link rel="icon" sizes="any" href="./favicon.ico" />
       <link rel="icon" type="image/png" sizes="32x32" href="/static/images/avatar.png?v=2" />
@@ -84,7 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Header />
                 <main className="mb-auto">
                   {children}
-                  <Analytics />
+                  <SpeedInsights />
                 </main>
               </SearchProvider>
               <Footer />
