@@ -12,7 +12,7 @@ export default function Home({ posts }) {
             {siteMetadata.description}
           </p>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-          Don't hesitate to react out to me on any of my social media accounts that you'll find down below or on  my email (ismail.tlemcani@gmail.com)
+          Don't hesitate to react out to me on any of my social media accounts that you'll find down below or on  my email ismail@ismailtlemcani.com
           </p>
         </div>
       </div>
