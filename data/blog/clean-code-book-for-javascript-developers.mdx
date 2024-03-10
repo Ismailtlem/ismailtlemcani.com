@@ -1,17 +1,10 @@
 ---
-title: "The Clean Code Book for JavaScript Developers: A Quick Summary"
-date: "2021-07-22"
-tags:
-  [
-    'software-development',
-    'software-engineering',
-    'clean-code',
-    'JavaScript',
-    'robert-c-martin',
-  ]
+title: 'The Clean Code Book for JavaScript Developers: A Quick Summary'
+date: '2021-07-22'
+tags: ['software-development', 'software-engineering', 'clean-code', 'JavaScript']
 draft: false
 summary: Blog post summarizing the book “Clean Code” written by Robert Martin on how to write a readable and maintainable code
-images: ["/static/images/clean-code-big-picture.png"]
+images: ['/static/images/clean-code-big-picture.png']
 ---
 
 <Image
@@ -59,10 +52,10 @@ Because names are everywhere in a software, it’s very important to choose well
 
 ```javascript
 //Bad naming
-const d = new Date();
+const d = new Date()
 
 //Good naming
-const currentDate = new Date();
+const currentDate = new Date()
 ```
 
 - Choose, whenever possible, searchable names that can be easily found in a program. One can easily find MAX_CLASSES_PER_STUDENT in a program but a variable named e will be hard to find because it is a common letter in the English language and likely to show up in every passage of text in every program.
@@ -78,21 +71,21 @@ Here are some recommended rules to have clean and understandable functions :
 //Bad
 function notifyUsers(users) {
   users.forEach((user) => {
-    const userRecord = database.lookup(user);
+    const userRecord = database.lookup(user)
     if (userRecord.isVerified()) {
-      notify(user);
+      notify(user)
     }
-  });
+  })
 }
 
 // Good
 function notifyVerifiedUsers(users) {
-  users.filter(isUserVerified).forEach(notify);
+  users.filter(isUserVerified).forEach(notify)
 }
 
 function isUserVerified(user) {
-  const userRecord = database.lookup(user);
-  return userRecord.isVerified();
+  const userRecord = database.lookup(user)
+  return userRecord.isVerified()
 }
 ```
 
@@ -125,12 +118,12 @@ Below are some of the rules recommended by the author for a nice code format:
 ```javascript
 // Good code
 const handleClose = () => {
-  setOpen(false);
-};
+  setOpen(false)
+}
 const handleSubmit = (e) => {
-  e.preventDefault();
-  handleClose();
-};
+  e.preventDefault()
+  handleClose()
+}
 ```
 
 - **Horizontal formatting**: It is recommended to keep our lines short. As a rule, the author suggests writing lines of code that are not longer than 120 characters.
@@ -145,11 +138,11 @@ Here are some recommended rules from the book on how to successfully handle erro
 
 ```javascript
 const setProperty = (obj, value, property) => {
-  obj[property] = value;
+  obj[property] = value
   if (!value) {
-    return "Value not found";
+    return 'Value not found'
   }
-};
+}
 ```
 
 We should instead, handle the potential error with an exception
@@ -157,10 +150,10 @@ We should instead, handle the potential error with an exception
 ```javascript
 const setProperty = (obj, value, property) => {
   if (!value) {
-    throw new Error("Value not found");
+    throw new Error('Value not found')
   }
-  obj[property] = value;
-};
+  obj[property] = value
+}
 ```
 
 - We should also provide context when catching errors to help catch the location and the source of the error.
@@ -169,15 +162,15 @@ const setProperty = (obj, value, property) => {
 ```javascript
 function divideTwoNumbers(x, y) {
   if (y === 0) {
-    throw "Can't divide by 0";
+    throw "Can't divide by 0"
   }
-  return x / y;
+  return x / y
 }
 
 try {
-  const result = divideTwoNumbers(5, 0);
+  const result = divideTwoNumbers(5, 0)
 } catch (error) {
-  console.log(error);
+  console.log(error)
 }
 ```
 
@@ -195,48 +188,48 @@ Below is what the author recommends to have a clean code test:
 
 ```javascript
 // Not recommended because we are testing multiple concepts
-import assert from "assert";
+import assert from 'assert'
 
-describe("MomentJS", () => {
-  it("handles date boundaries", () => {
-    let date;
+describe('MomentJS', () => {
+  it('handles date boundaries', () => {
+    let date
 
-    date = new MomentJS("1/1/2015");
-    date.addDays(30);
-    assert.equal("1/31/2015", date);
+    date = new MomentJS('1/1/2015')
+    date.addDays(30)
+    assert.equal('1/31/2015', date)
 
-    date = new MomentJS("2/1/2016");
-    date.addDays(28);
-    assert.equal("02/29/2016", date);
+    date = new MomentJS('2/1/2016')
+    date.addDays(28)
+    assert.equal('02/29/2016', date)
 
-    date = new MomentJS("2/1/2015");
-    date.addDays(28);
-    assert.equal("03/01/2015", date);
-  });
-});
+    date = new MomentJS('2/1/2015')
+    date.addDays(28)
+    assert.equal('03/01/2015', date)
+  })
+})
 
 // Good code
-import assert from "assert";
+import assert from 'assert'
 
-describe("MomentJS", () => {
-  it("handles 30-day months", () => {
-    const date = new MomentJS("1/1/2015");
-    date.addDays(30);
-    assert.equal("1/31/2015", date);
-  });
+describe('MomentJS', () => {
+  it('handles 30-day months', () => {
+    const date = new MomentJS('1/1/2015')
+    date.addDays(30)
+    assert.equal('1/31/2015', date)
+  })
 
-  it("handles leap year", () => {
-    const date = new MomentJS("2/1/2016");
-    date.addDays(28);
-    assert.equal("02/29/2016", date);
-  });
+  it('handles leap year', () => {
+    const date = new MomentJS('2/1/2016')
+    date.addDays(28)
+    assert.equal('02/29/2016', date)
+  })
 
-  it("handles non-leap year", () => {
-    const date = new MomentJS("2/1/2015");
-    date.addDays(28);
-    assert.equal("03/01/2015", date);
-  });
-});
+  it('handles non-leap year', () => {
+    const date = new MomentJS('2/1/2015')
+    date.addDays(28)
+    assert.equal('03/01/2015', date)
+  })
+})
 ```
 
 - **F.I.R.S.T rule**: Code test should, in addition to following the clean code principles, follow the following rules :
