@@ -1,0 +1,137 @@
+---
+title: 'Python web frameworks in production (1): Web app for medical sector'
+date: '2024-03-04'
+tags: [web-development, django, python, react]
+draft: false
+summary: How to use Python web frameworks in the medical sector ?
+images: ['/static/images/django-base-image.png']
+---
+
+In this series of posts, I will start sharing some real use cases of Python web frameworks in some real production apps I was part of in order to have an idea on how those tools can be used to solve different problems.
+This first post is about an app for the healthcare industry that has a **Django** based backend.
+
+## What does the app do ?
+
+This was a web app for hospitals in France, that has the objective of helping pharmacists in their daily prescriptions analysis. The main goal of the app is to check the history of the patient and show alerts if there is any factor that could prevent the patient from taking a medicine
+
+## Overview of the tech stack of the app ?
+
+Below are the main packages and services that were used in this app.
+
+Frontend ?
+
+- react
+- apollo-client
+- cypress
+- material-ui
+- axios
+- ...
+
+Backend ?
+
+- django
+- djangorestframework
+- graphene-django
+- python client to use the IAM service
+- ...
+
+Databases ?
+
+- Postgresql
+- Redis
+
+External services ?
+
+- Theriaque : External French national medical API
+- ...
+
+## How the app looked like
+
+Here are some screenshots that show how the app looked like. Those screenshots are taken from the official website of the product. There is no sensitive data here.
+
+<Image
+  alt={`medical-app-image`}
+  src={`/static/images/medical-app-1.png`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+<Image
+  alt={`medical-app-image`}
+  src={`/static/images/medical-app-3.png`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+## Glimpse of the architecture
+
+Here is a small overview of the app. Not every element is shown
+
+<Image
+  alt={`medical-app`}
+  src={`/static/images/medical-app.png`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+## API design of the backend
+
+Our choice was to make a GraphQL API design on the backend. We made this choice in order to simplify the requests made from the frontend to retrieve the specific subsets of the data needed. Fetching a specific data in a RESTful API design would have needed many consecutives requests
+
+## urls.py file ?
+
+As shown in the graphene [documentation](https://docs.graphene-python.org/projects/django/en/latest/tutorial-plain/#creating-graphql-and-graphiql-views), we just had to use the GraphQLView object to define the graphql endpoint.
+Here is an example of how to add the graphql endpoint
+
+```python
+from graphene_django.views import GraphQLView
+
+urlpatterns = [
+    path("graphql", GraphQLView.as_view(graphiql=True)),
+]
+
+```
+
+## How the backend was resolving queries ?
+
+Since the app was using graphene-django, we just followed the [official documentation](https://docs.graphene-python.org/en/latest/) to configure
+the backend to receive graphql queries.
+After that, we just had to write the resolver methods for each query. Here is how resolver methods looked like
+
+```python
+    @permissions_checker([IsUser])
+    def resolve_dummy_query(self, info, use_redis=USE_REDIS, **kwargs):
+        res = {"data": []}
+        ... (business logic)
+        return res
+```
+
+## Testing ?
+
+We just used the test runner provided by Django as shown [here](https://docs.djangoproject.com/en/5.0/topics/testing/advanced/#using-the-django-test-runner-to-test-reusable-applications).
+To write the tests, we made use of the [test client](https://docs.graphene-python.org/en/latest/testing/#test-client) within graphene. This test client acts like a dummy graphql client.
+Here is how test cases we wrote looked like
+
+```python
+  def test_dummy_query(self):
+      client = Client(schema, context_value=self.context)
+      query_result = client.execute(graphql_query_to_test,
+                                            variables={
+                                                'first_variable': 'first_variable_value',
+                                                'second_variable': 'second_variable_value'
+                                            })
+      self.assertMatchSnapshot(query_result)
+
+```
+
+## Challenges of this app
+
+There were many challenges with this project. Some of them are
+
+- The first one is making the app as user friendly as possible in order for the users to quickly adopt the app and to enable them to quickly go to the data they wanted.
+- Another challenge is the high sensivity of the data that was involved in this project. Most of the data was anonymised in the backend using a middleware
+- The functional aspect of the app was also another challenge. There is a lot of industry standards in healthcare applications and especially how healthcare data is exchanged ([HL7 format](https://en.wikipedia.org/wiki/Health_Level_7)) that we had to quickly understand.
+- Lastly, the performance of the backend was also another challenge we had to take care of since the app was relying on many data science algorithms and models (some do take a consequent time) to give the alerts. We used for that purpose redis as a caching mechanism in order to quickly retrieve the most important results
