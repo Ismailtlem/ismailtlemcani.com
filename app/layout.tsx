@@ -11,6 +11,7 @@ import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/react'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Header />
                 <main className="mb-auto">
                   {children}
+                  <Analytics />
                   <SpeedInsights />
                 </main>
               </SearchProvider>
