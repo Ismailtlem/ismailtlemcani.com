@@ -1,0 +1,112 @@
+---
+title: 'Python tip N3 : Create a Python package and publish it with only one file'
+date: '2024-04-17'
+tags: ['python', 'packages', 'pypi', 'tips']
+draft: false
+summary: 'How can you create a python package and publish it simply'
+images: ['/static/images/python-package.jpg']
+---
+
+<Image
+  alt={`Merge-python-dictionaries`}
+  src={`/static/images/python-package.jpg`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+In this small blog post, I will share my tips and what I learned to quickly make your python package, and publish it with only one file.
+
+## Useful resources on this topic
+
+This post is mainly inspired by Simon Willison [blog post](https://til.simonwillison.net/python/pyproject) on this topic and the well known youtuber Arjan Codes [video](https://www.youtube.com/watch?v=5KEObONUkik) on this subject
+
+## Structure of the package
+
+It's better if you can use a template to generate a skeleton of your package and its most important files. You can use [this one](https://github.com/simonw/python-lib/).
+
+Here is how a simple cli package might looks like
+
+<Image
+  alt={`package-structure`}
+  src={`/static/images/package-structure.png`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+## Files needed to build the package
+
+You only need _pyproject.toml_. The mandatory table in this file is the _project_ table. In the project table, the mandatory names are the name and the version. Here is how it might look like for a Python CLI package.
+
+```toml
+[project]
+name = "py-like-wc"
+version = "0.2"
+description = "python wc tool"
+readme = "README.md"
+authors = [{ name = "Ismail Tlemcani" }]
+license = { text = "Apache-2.0" }
+requires-python = ">=3.9"
+classifiers = ["License :: OSI Approved :: Apache Software License"]
+dependencies = []
+
+```
+
+## Build the package
+
+You can build the package by using only the [build package](https://github.com/pypa/build) in the following way. This is now the standard way to build python packages.
+
+```sh
+python -m build
+```
+
+This command will create 2 files : a whl file and a tar file
+
+<Image
+  alt={`python-dist-folder`}
+  src={`/static/images/python-dist-folder.png`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+## Publish the package
+
+To publish the package, you can use the [twine package](https://github.com/pypa/twine). The command to do this is the following command
+
+```sh
+twine upload dist/*
+```
+
+By default, this command will upload your package to the [official PyPi repository](https://pypi.org/). If you want to upload the package to another repository, you can define a custom configuration in your _*.pypirc*_ file. This file is usually in your HOME directory
+
+```text
+[testpypi]
+repository: https://test.pypi.org/legacy/
+username: my_username
+password: my_pypi_token
+
+```
+
+You can see more details on how to define a _*.pypirc*_ file [here](https://packaging.python.org/en/latest/specifications/pypirc/)
+
+You can then upload the package to the repository you defined by using the section title (testpypi in the example above) with the following command
+
+```sh
+twine upload -r testpypi dist/*
+```
+
+When uploaded, you can see your package in the repository in the url that the twine command provided in your console output
+
+<Image
+  alt={`upload-output`}
+  src={`/static/images/upload-output.jpg`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+## Update the package
+
+You simply have to change the version, and then uplaod again
