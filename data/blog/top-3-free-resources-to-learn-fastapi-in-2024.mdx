@@ -1,0 +1,80 @@
+---
+title: 'Top 3 Free Resources to Learn FastAPI in 2024'
+date: '2024-04-28'
+tags: [fastapi, python, web-development, software-development, software-engineering]
+draft: true
+summary: 'Introduction to the FastAPI Framework and a handpicked list of free resources to learn this framework'
+images: ['/static/images/python-django-image.png']
+---
+
+<Image alt={`Fastapi-logo`} src={`/static/images/fastapi.png`} width={1440} height={960} priority />
+
+This blog post serves as a small introduction to FastAPI as well as a handpicked list of resources where to learn it more in depth
+
+## Why are there so many web frameworks ?
+
+With the web becoming more and more complex, and as technology advances and different needs emerge,
+there is an increase for new tools that leverages a specific aspect such as scalability, easier learning curve or community support. That's the reason we have so many web frameworks where each one addresses a specific need.
+
+## What is FastAPI ? What advantages does it have over the existing Python frameworks ?
+
+[FastAPI](https://fastapi.tiangolo.com/) is a new lightweight framework that is designed to be easy to use and learn thanks to an outstanding documentation, fast and with a growing community.
+It was created by [Sebastián Ramírez](https://twitter.com/tiangolo) in 2018.
+
+It is based on standard Python type hints, and includes many features like automatic data validation because of its integration with Pydantic, and automatic API documentation generation that adheres to the OpenAPI standard.
+
+## How FastAPI projects are organised
+
+Unlike Django, FastAPI doesn't impose a specific structure in order to organise your projects. But it is recommended to follow best practices in order to have a well structured project.
+
+One very well structured template that a lot of people in the community is using is [this one](https://github.com/tiangolo/full-stack-fastapi-template/) made by FastAPI creator.
+
+## Quickly set up FastAPI
+
+It is very easy to start a new FastAPI project. Just install the package and an ASGI server such as uvicorn
+
+```python
+pip install fastapi
+pip install "uvicorn[standard]"
+```
+
+Create a new file, that you can name main.py as an example, that will have the logic of your endpoints
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+
+```
+
+Start after that your server using
+
+```bash
+uvicorn main:app --reload
+```
+
+You can also directly see your api documentation that is automatically generated on /docs and /redoc routes
+
+<Image
+  alt={`fastapi-docs`}
+  src={`/static/images/fastapi-docs.png`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+## Some resources to learn FastAPI
+
+Below is a handpicked list of resources where you can learn FastAPI for free.
+
+- Firstly, the [official documentation](https://fastapi.tiangolo.com/learn/) is one of the best technical documentation I've ever seen. I doubt you'll ever need to see another source to learn FastAPI.
+
+- This [blog](https://www.fastapitutorial.com/) is entirely focused on FastAPI and provides a lot of articles on this subject.
+
+- Finally, [ArjanCodes Youtube Channel](https://www.youtube.com/@ArjanCodes), as well as [Marcelo Trylesinski Youtube Channel](https://www.youtube.com/@fastapiexpert) do have a lot of very good content and talks on different aspects regarding FastAPI.
