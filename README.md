@@ -7,8 +7,8 @@ https://ismailtlemcani.com/
 ```
 git clone git@github.com:Ismailtlem/ismail-tlemcani-blog.git
 cd ismailtlemcani.com
-npm install
-npm run dev
+yarn
+yarn dev
 
 ```
 
