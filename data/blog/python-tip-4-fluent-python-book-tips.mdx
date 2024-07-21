@@ -1,0 +1,71 @@
+---
+title: 'Python tip N4 : When list is not the answer (from Fluent Python book)'
+date: '2024-07-21'
+tags: ['python', 'book', 'fluent-python', 'tips']
+draft: false
+summary: Should you always use a list ?
+images: ['/sghali_mak/tatic/images/fluent-python-book.jpg']
+---
+
+<Image
+  alt={`Fluent-python-book`}
+  src={`/static/images/fluent-python-book.jpg`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+This small post is a quick python tip from the awesome book [Fluent Python](https://www.amazon.fr/Fluent-Python-Luciano-Ramalho/dp/1491946008)
+
+## What is this book about ?
+
+**Fluent Python** is a classic in the Python community. It is about how to write effective, idiomatic Python code by leveraging its best and less known features.
+
+## Who is this book for ?
+
+As the author of the book says, this book is not for junior developers as it goes in depth into so many concepts that will be hard to follow if you are just starting out in your Python journey.
+For any experienced Python developer, this book is worth reading and I am sure that you'll learn so many new Python features in it as I did.
+
+## Who is the author ?
+
+Luciano Ramalho is a world-renowned Python expert. He is a Web developer, Python trainer and has spoken in so many Python conferences.
+
+## When a list is not the answer
+
+As Python developers, lists are a data structure we often use to represent a container of many objects. It is flexible and easy to use. But depending on the object, it might not be the best solution.
+Here is a summary of some of the best alternatives suggested by the book that might be better to use in other situations.
+
+| Situation                                                               | Best DS to use | Justification                                                                                                                                              |
+| ----------------------------------------------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| You are storing only float numbers                                      | arrays         | Much more memory efficient since arrays are just wrappers of C arrays, and numerical operations are much more optimised in C in comparison to Python lists |
+| Do a membership test = check that a list contains an element            | set            | Usage of hash functions in sets makes this operation much faster                                                                                           |
+| You are constantly removing and adding elements to the ends of the list | deque          | Much more optimised for appending or removing from the ends of the lists. Those operations happen in O(1) in deque in comparison to O(n) in regular lists  |
+
+## Example of usages
+
+As an example, if you have a program where you are managing a ticket queue, using _deque_ is more suitable than a regular list because of the reason said above.
+
+```python
+from collections import deque
+
+# Create a deque to represent the queue at the ticket counter
+ticket_queue = deque()
+
+# Function to add a person to the queue
+def arrive(person):
+    ticket_queue.append(person)
+    print(f"{person} arrived. Queue: {list(ticket_queue)}")
+
+# Function to serve a person from the queue
+def serve():
+    if ticket_queue:
+        person = ticket_queue.popleft()
+        print(f"{person} served. Queue: {list(ticket_queue)}")
+    else:
+        print("No one to serve. Queue is empty.")
+```
+
+## Conclusion
+
+The general idea to keep in mind here is to avoid automatically using lists for every situation where we need a container of objects.
+The best practice is to think beforehand about the type of objects and their caracteristics : are the objects immutable, are the objects unique, what is the type of the data we are storing, ...
