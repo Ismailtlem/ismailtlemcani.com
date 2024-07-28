@@ -1,14 +1,13 @@
-import type { Authors } from 'contentlayer/generated'
+import type { Resume } from 'contentlayer/generated'
 import { Toc } from 'pliny/mdx-plugins/remark-toc-headings'
 import { ReactNode } from 'react'
 
-import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import siteMetadata from '@/data/siteMetadata'
 
 interface Props {
   children: ReactNode
   toc: Toc
-  content: Omit<Authors, '_id' | '_raw' | 'body'>
+  content: Omit<Resume, '_id' | '_raw' | 'body'>
 }
 
 export default function AuthorLayout({ children, content, toc }: Props) {
@@ -18,8 +17,6 @@ export default function AuthorLayout({ children, content, toc }: Props) {
 
   return (
     <>
-      <ScrollTopAndComment showScrollToComment={false} />
-
       <div className="resume">
         <header className="space-y-2 pb-8 pt-6 md:space-y-5">
           <p className="text-base text-gray-500 dark:text-gray-400 md:text-lg md:leading-7">
