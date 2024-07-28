@@ -105,7 +105,6 @@ export default function ListLayoutWithTags({
                                 alt="article-image"
                                 src={image}
                                 className="object-cover object-center w-full h-full"
-                                layout="responsive"
                                 width={100}
                                 height={100}
                               />
