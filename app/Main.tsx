@@ -1,6 +1,6 @@
 import siteMetadata from '@/data/siteMetadata'
 
-export default function Home({ posts }) {
+export default function Home() {
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
