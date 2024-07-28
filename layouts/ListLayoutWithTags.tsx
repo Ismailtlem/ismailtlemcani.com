@@ -98,19 +98,20 @@ export default function ListLayoutWithTags({
                         </dd>
                       </dl>
                       <div className="space-y-3 flex flex-row">
-                        {images.map((image) => {
-                          return (
-                            <div className="mt-5 flex-shrink-0 mr-4 w-full md:w-1/3 lg:w-1/4 overflow-hidden">
-                              <Image
-                                alt="article-image"
-                                src={image}
-                                className="object-cover object-center w-full h-full"
-                                width={100}
-                                height={100}
-                              />
-                            </div>
-                          )
-                        })}
+                        {images &&
+                          images.map((image) => {
+                            return (
+                              <div className="mt-5 flex-shrink-0 mr-4 w-full md:w-1/3 lg:w-1/4 overflow-hidden">
+                                <Image
+                                  alt="article-image"
+                                  src={image}
+                                  className="object-cover object-center w-full h-full"
+                                  width={100}
+                                  height={100}
+                                />
+                              </div>
+                            )
+                          })}
                         <div>
                           <div>
                             <h2 className="text-2xl font-bold leading-8 tracking-tight">
