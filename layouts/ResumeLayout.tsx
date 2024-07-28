@@ -1,16 +1,14 @@
 import type { Resume } from 'contentlayer/generated'
-import { Toc } from 'pliny/mdx-plugins/remark-toc-headings'
 import { ReactNode } from 'react'
 
 import siteMetadata from '@/data/siteMetadata'
 
 interface Props {
   children: ReactNode
-  toc: Toc
   content: Omit<Resume, '_id' | '_raw' | 'body'>
 }
 
-export default function AuthorLayout({ children, content, toc }: Props) {
+export default function ResumeLayout({ children, content }: Props) {
   const { title, headerTitle } = siteMetadata
 
   const description = 'My professional career, experiences, and skills.'
