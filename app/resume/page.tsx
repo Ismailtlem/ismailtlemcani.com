@@ -7,7 +7,7 @@ import { coreContent } from 'pliny/utils/contentlayer'
 export const metadata = genPageMetadata({ title: 'Resume' })
 
 export default function Page() {
-  const resume = allResumes.find((p) => p.slug === 'resume') as Resumes
+  const resume = allResumes.find((p) => p.slug === 'resume')
   const mainContent = coreContent(resume)
 
   return (
