@@ -16,12 +16,6 @@ export default function ResumeLayout({ children, content }: Props) {
   return (
     <>
       <div className="resume">
-        <header className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <p className="text-base text-gray-500 dark:text-gray-400 md:text-lg md:leading-7">
-            {description}
-          </p>
-        </header>
-
         <div className="border border-t border-gray-200 dark:border-gray-700" />
 
         <main className="mx-auto my-12 max-w-screen-xl gap-12 space-y-12 rounded-md bg-gray-100 p-3 md:flex md:space-y-0 md:p-8">
