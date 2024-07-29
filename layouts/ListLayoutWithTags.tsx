@@ -5,7 +5,6 @@ import Image from '@/components/Image'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
-import tagData from 'app/tag-data.json'
 import type { Blog } from 'contentlayer/generated'
 import { usePathname } from 'next/navigation'
 import { CoreContent } from 'pliny/utils/contentlayer'
@@ -68,11 +67,6 @@ export default function ListLayoutWithTags({
   initialDisplayPosts = [],
   pagination,
 }: ListLayoutProps) {
-  const pathname = usePathname()
-  const tagCounts = tagData as Record<string, number>
-  const tagKeys = Object.keys(tagCounts)
-  const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
-
   const displayPosts = initialDisplayPosts.length > 0 ? initialDisplayPosts : posts
 
   return (
@@ -101,7 +95,10 @@ export default function ListLayoutWithTags({
                         {images &&
                           images.map((image) => {
                             return (
-                              <div className="mt-5 flex-shrink-0 mr-4 w-full md:w-1/3 lg:w-1/4 overflow-hidden">
+                              <div
+                                key={image}
+                                className="mt-5 flex-shrink-0 mr-4 w-full md:w-1/3 lg:w-1/4 overflow-hidden"
+                              >
                                 <Image
                                   alt="article-image"
                                   src={image}

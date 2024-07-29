@@ -1,7 +1,7 @@
-import { ReactNode } from 'react'
-import type { Authors } from 'contentlayer/generated'
-import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
+import SocialIcon from '@/components/social-icons'
+import type { Authors } from 'contentlayer/generated'
+import { ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
@@ -10,7 +10,6 @@ interface Props {
 
 export default function AuthorLayout({ children, content }: Props) {
   const { name, avatar, occupation, company, email, twitter, linkedin, github } = content
-
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">

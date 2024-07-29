@@ -1,18 +1,13 @@
 import type { Resume } from 'contentlayer/generated'
-import { ReactNode } from 'react'
 
-import siteMetadata from '@/data/siteMetadata'
+import { ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
   content: Omit<Resume, '_id' | '_raw' | 'body'>
 }
 
-export default function ResumeLayout({ children, content }: Props) {
-  const { title, headerTitle } = siteMetadata
-
-  const description = 'My professional career, experiences, and skills.'
-
+export default function ResumeLayout({ children }: Props) {
   return (
     <>
       <div className="resume">
