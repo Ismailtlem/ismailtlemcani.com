@@ -3,7 +3,6 @@ import { SVGProps } from 'react'
 // Icons taken from: https://simpleicons.org/
 // To add a new icon, add a new function here and add it to components in social-icons/index.tsx
 
-
 export function Github(svgProps: SVGProps<SVGSVGElement>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...svgProps}>
@@ -36,5 +35,3 @@ export function Twitter(svgProps: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
-
-
