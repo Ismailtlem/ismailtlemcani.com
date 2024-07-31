@@ -2,7 +2,7 @@
 const siteMetadata = {
   title: 'Ismail Tlemcani - Software Developer',
   author: 'Ismail Tlemcani',
-  headerTitle: 'Ismail Tlemcani',
+  headerTitle: 'Home',
   description:
     'I help companies to provide value to their customers by using JavaScript and Python tools. I also love writing about what I am learning at the moment and working on exciting open source projects.',
   language: 'en-us',
