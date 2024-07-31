@@ -1,5 +1,3 @@
-import siteMetadata from '@/data/siteMetadata'
-
 export default function Home() {
   return (
     <>
@@ -13,7 +11,9 @@ export default function Home() {
           </p>
 
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {siteMetadata.description}
+            I help companies to provide value to their customers by using{' '}
+            <strong>JavaScript and Python tools. </strong>I also love writing about what I am
+            learning at the moment and working on exciting open source projects.
           </p>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             Don't hesitate to react out to me on any of my social media accounts that you'll find
