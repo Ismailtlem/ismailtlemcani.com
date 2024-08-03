@@ -91,7 +91,7 @@ export default function ListLayoutWithTags({
                           <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
                         </dd>
                       </dl>
-                      <div className="space-y-3 flex flex-row invisible md:visible">
+                      <div className="space-y-3 flex flex-row hidden md:flex">
                         {images &&
                           images.map((image) => {
                             return (
