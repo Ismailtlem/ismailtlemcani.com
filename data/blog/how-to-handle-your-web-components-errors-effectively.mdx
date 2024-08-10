@@ -27,7 +27,7 @@ Hello reader👋
 
 In this blog post, we will give an overview on why catching and handling errors is important in software engineering in general and the ways offered by popular web development tools such as React to effectively handle errors.
 
-## Why errors happen ?
+### Why errors happen ?
 
 The majority of the well known applications we use on a daily basis, like Facebook, YouTube, etc.,
 
@@ -37,7 +37,7 @@ It's not that the developers who created those products are stupid, lazy or inco
 
 Because of the importance of software programs in our current world and the criticality of the areas in which some programs are used such as the healthcare industry, it is important to effectively handle potential errors that might be in the code of those programs in order to offer the best possible product to the end users and to avoid any bad consequence of a faulty program.
 
-## Why is error handling important in React apps
+### Why is error handling important in React apps
 
 It is important to handle potential errors that can be in your React app because those errors might end-up crashing the entire React lifecycle or reaching the top-level of the main execution thread.
 From React 16 onward, as stated in [the official documentation](https://reactjs.org/docs/error-boundaries.html#new-behavior-for-uncaught-errors), errors that are not caught will result in unmounting of the whole React component tree.
@@ -54,7 +54,7 @@ Because of the importance of handling errors we stated above, it is very importa
 
 Fortunately, implementing such patterns is simple with the recent React APIs. More specifically, React 16 introduces the Error Boundaries mechanism that is very useful for that purpose.
 
-## Component stack trace
+### Component stack trace
 
 From React 16, all errors that occurred during the rendering phase are printed into the console in development.
 In addition to that, the component stack trace is also provided. We can therefore see where exactly in the component tree the error has happened:
@@ -70,7 +70,7 @@ In addition to that, the component stack trace is also provided. We can therefor
 The component stack trace additionally includes filenames and line numbers that you can use to see where exactly the error happened.
 The component stack trace works by default in projects created using [Create React App](https://github.com/facebook/create-react-app). If you don’t use it, you can manually add this plugin to your Babel setup.
 
-## How to effectively handle errors in React components ?
+### How to effectively handle errors in React components ?
 
 ### Catching error with try … catch
 
@@ -127,26 +127,26 @@ As we previously mentioned, an error boundary is just a class component that imp
 Here is a simple React app where we are explicitly throwing an error in the Users component below
 
 ```javascript
-import { Users } from './Users'
+import { Users } from './Users';
 function App() {
   return (
     <div className="App">
       <h1>Hello dear reader</h1>
       <Users />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 ```
 
 Here is the Users component where we are explicitly throwing an error
 
 ```javascript
 export const Users = () => {
-  throw new Error('Error!')
-  return <div> Users </div>
-}
+  throw new Error('Error!');
+  return <div> Users </div>;
+};
 ```
 
 Running this React app will throw the following error and cause the entire app to crash
@@ -162,28 +162,28 @@ Running this React app will throw the following error and cause the entire app t
 To prevent the app from entirely crashing, we need to add the Error Boundary component. Here is a simple implementation of an error boundary class
 
 ```javascript
-import React from 'react'
+import React from 'react';
 
 export class ErrorBoundary extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = { hasError: false }
+    super(props);
+    this.state = { hasError: false };
   }
 
   static getDerivedStateFromError(error) {
-    return { hasError: true }
+    return { hasError: true };
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error(error, errorInfo)
+    console.error(error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
-      return <h1>Something went wrong.</h1>
+      return <h1>Something went wrong.</h1>;
     }
 
-    return this.props.children
+    return this.props.children;
   }
 }
 ```
@@ -236,9 +236,9 @@ yarn add react-boundary-library
 - To handle errors using this library, you can do it simply by wrapping the component where your error might show up inside the **ErrorBoundary** component from **react-boundary-library**. You can also provide a fallback component as a prop to the Error Boundary component which will be the UI shown in case of an error. Here is a concrete example
 
 ```javascript
-import { ErrorBoundary } from 'react-error-boundary'
+import { ErrorBoundary } from 'react-error-boundary';
 
-import { Users } from './Users'
+import { Users } from './Users';
 
 function ErrorFallback({ error, resetErrorBoundary }) {
   return (
@@ -247,7 +247,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
       <p>{error.message}</p>
       <button onClick={resetErrorBoundary}>Try again</button>
     </div>
-  )
+  );
 }
 
 function App() {
@@ -258,7 +258,7 @@ function App() {
         <Users />
       </ErrorBoundary>
     </div>
-  )
+  );
 }
 ```
 
@@ -275,7 +275,7 @@ function App() {
   priority
 />
 
-## Final words
+### Final words
 
 Generally speaking, a software error is essentially a mismatch between what is expected from the program and the real output.
 It is almost impossible to make software that is error-free, and that even with the development of automated testing tools. On some occasions, these errors have little effect, while in other contexts, like in the healthcare industry or in banking applications, the effects of an error can be extremely expensive to fix.

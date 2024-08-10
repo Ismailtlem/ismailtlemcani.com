@@ -27,6 +27,7 @@ module.exports = {
       colors: {
         primary: colors.emerald,
         gray: colors.gray,
+        black: colors.black,
       },
       typography: ({ theme }) => ({
         DEFAULT: {
@@ -48,6 +49,7 @@ module.exports = {
             },
             h3: {
               fontWeight: '600',
+              color: theme('colors.black'),
             },
             code: {
               color: theme('colors.indigo.500'),

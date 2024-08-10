@@ -17,11 +17,11 @@ images: ['/static/images/python-package.jpg']
 
 In this small blog post, I will share my tips and what I learned to quickly make your python package, and publish it with only one file.
 
-## Useful resources on this topic
+### Useful resources on this topic
 
 This post is mainly inspired by Simon Willison [blog post](https://til.simonwillison.net/python/pyproject) on this topic and the well known youtuber Arjan Codes [video](https://www.youtube.com/watch?v=5KEObONUkik) on this subject
 
-## Structure of the package
+### Structure of the package
 
 It's better if you can use a template to generate a skeleton of your package and its most important files. You can use [this one](https://github.com/simonw/python-lib/).
 
@@ -35,7 +35,7 @@ Here is how a simple cli package might looks like
   priority
 />
 
-## Files needed to build the package
+### Files needed to build the package
 
 You only need _pyproject.toml_. The mandatory table in this file is the _project_ table. In the project table, the mandatory names are the name and the version. Here is how it might look like for a Python CLI package.
 
@@ -53,7 +53,7 @@ dependencies = []
 
 ```
 
-## Build the package
+### Build the package
 
 You can build the package by using only the [build package](https://github.com/pypa/build) in the following way. This is now the standard way to build python packages.
 
@@ -71,7 +71,7 @@ This command will create 2 files : a whl file and a tar file
   priority
 />
 
-## Publish the package
+### Publish the package
 
 To publish the package, you can use the [twine package](https://github.com/pypa/twine). The command to do this is the following command
 
@@ -107,6 +107,6 @@ When uploaded, you can see your package in the repository in the url that the tw
   priority
 />
 
-## Update the package
+### Update the package
 
 You simply have to change the version, and then uplaod again

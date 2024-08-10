@@ -1,10 +1,10 @@
 ---
-title: "Performance Tests on Common JavaScript Array Methods"
-date: "2022-03-19"
+title: 'Performance Tests on Common JavaScript Array Methods'
+date: '2022-03-19'
 tags: [JavaScript, web-development, software-development, arrays, lists]
 draft: false
-summary: "Which of the JavaScript array methods is the fastest to loop through an array ? "
-images: ["/static/images/js-methods.png"]
+summary: 'Which of the JavaScript array methods is the fastest to loop through an array ? '
+images: ['/static/images/js-methods.png']
 ---
 
 <Image
@@ -17,12 +17,12 @@ images: ["/static/images/js-methods.png"]
 
 This blog post is about comparing the running times of the most commonly used ways to loop through an array in JavaScript in order to see which one is the most efficient.
 
-## The tests
+### The tests
 
 The idea is very simple. I compared the running times of five very common ways ( **map**, **forEach**, **for**, **while**, **do while**) of looping through an array using an array of 100 values and another array of 10 million values.
 The code used was run in a Node.js runtime environment version 16.14.0 inside a Ubuntu 20 laptop.
 
-## Testing the .map() method
+### Testing the .map() method
 
 Here is the code used for an array of 100 values
 
@@ -38,11 +38,11 @@ for (let index = 0; index < arrayToTest; index++) {
   index * index + Math.sqrt(item);
 }
 
-console.time("map");
+console.time('map');
 arrayToTest.map((item, index) => {
   return (arrayToTest[index] = item * item + Math.sqrt(item));
 });
-console.timeEnd("map");
+console.timeEnd('map');
 ```
 
 Here is the result I got from the above code :
@@ -57,7 +57,7 @@ For an array of 10 million values, I used the same code as above while just repl
 map: 1865.563ms
 ```
 
-## Testing the .forEach() method
+### Testing the .forEach() method
 
 Here is the code used for an array of 100 values
 
@@ -73,11 +73,11 @@ for (let index = 0; index < arrayToTest; index++) {
   index * index + Math.sqrt(item);
 }
 
-console.time("forEach");
+console.time('forEach');
 arrayToTest.forEach((item, index) => {
   return (arrayToTest[index] = item * item + Math.sqrt(item));
 });
-console.timeEnd("forEach");
+console.timeEnd('forEach');
 ```
 
 Here is the result I got from the above code :
@@ -92,7 +92,7 @@ For an array of 10 million values, I used the same code as above while just repl
 forEach: 1201.149ms
 ```
 
-## Testing the for loop
+### Testing the for loop
 
 Here is the code used for an array of 100 values
 
@@ -108,11 +108,11 @@ for (let index = 0; index < arrayToTest; index++) {
   index * index + Math.sqrt(item);
 }
 
-console.time("for");
+console.time('for');
 for (let i = 0; i < arrayToTest.length; i++) {
   arrayToTest[i] = arrayToTest[i] * arrayToTest[i] + Math.sqrt(arrayToTest[i]);
 }
-console.timeEnd("for");
+console.timeEnd('for');
 ```
 
 Here is the result I got from the above code :
@@ -127,7 +127,7 @@ For an array of 10 million values, I used the same code as above while just repl
 for: 109.778ms
 ```
 
-## Testing the while loop
+### Testing the while loop
 
 Here is the code used for an array of 100 values
 
@@ -143,13 +143,13 @@ for (let index = 0; index < arrayToTest; index++) {
   index * index + Math.sqrt(item);
 }
 
-console.time("while");
+console.time('while');
 let i = 0;
 while (i < arrayToTest.length) {
   arrayToTest[i] = arrayToTest[i] * arrayToTest[i] + Math.sqrt(arrayToTest[i]);
   i++;
 }
-console.timeEnd("while");
+console.timeEnd('while');
 ```
 
 Here is the result I got from the above code :
@@ -164,7 +164,7 @@ For an array of 10 million values, I used the same code as above while just repl
 while: 108.698ms
 ```
 
-## Testing the do…while loop
+### Testing the do…while loop
 
 Here is the code used for an array of 100 values
 
@@ -180,13 +180,13 @@ for (let index = 0; index < arrayToTest; index++) {
   index * index + Math.sqrt(item);
 }
 
-console.time("do while");
+console.time('do while');
 let i = 0;
 do {
   arrayToTest[i] = arrayToTest[i] * arrayToTest[i] + Math.sqrt(arrayToTest[i]);
   i++;
 } while (i < arrayToTest.length);
-console.timeEnd("do while");
+console.timeEnd('do while');
 ```
 
 Here is the result I got from the above code :
@@ -201,7 +201,7 @@ For an array of 10 million values, I used the same code as above while just repl
 do while: 124.894ms
 ```
 
-## Summary
+### Summary
 
 For the array with 100 values, here are the results I got
 
@@ -230,7 +230,7 @@ do while: 124.894ms
   for while or do while have very close running times in big arrays and it is difficult to say, at least from the examples above, that one is radically faster than the others in big arrays.
   Additional tests are needed in that sense to determine which method is the most efficient.
 
-## Conclusion
+### Conclusion
 
 - Whenever we have to write a loop, it is important to consider what solution works best.
   In relatively small arrays, the optimization work done by the V8 engine is good enough.

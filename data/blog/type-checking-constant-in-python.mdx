@@ -17,7 +17,7 @@ images: ['/static/images/type-checking.png']
 
 Below is a small article in order to better understand the usage of the **TYPE_CHECKING** constant in Python
 
-## Typing in Python ?
+### Typing in Python ?
 
 As we know that Python is a dynamic language, which means it only checks the types of the variables you specified at runtime.
 You can read more details about that in this very well written [article](https://vickiboykis.com/2023/12/11/why-if-type_checking/).
@@ -32,18 +32,18 @@ The benefits of doing so are :
 Type hints are not necessary, and some Python programmers still prefer to not use them, but I do think it's a good habit to have and it's even officially encouraged because of
 the gradual integration of python types like _list_ and _dict_ in recent Python versions.
 
-## TYPE_CHECKING constant ?
+### TYPE_CHECKING constant ?
 
 It's a constant defined in the _typing_ module that is **False** at runtime and **True** while type checking with a type checker like mypy.
 We usually put the code that we don't want to be executed at runtime inside _if TYPE_CHECKING:_ condition
 
-## When should we use that ?
+### When should we use that ?
 
 Since code inside if TYPE_CHECKING: is not executed at runtime, this is a convenient way to send some information to the type checker without the code being evaluated at runtime.
 
 One usage of TYPE_CHECKING constant is resolving some circular import errors (module A imports module B and module B imports module A) caused by adding some type annotations
 
-### Example ?
+#### Example ?
 
 Consider this file _a.py_
 
@@ -88,7 +88,7 @@ Running the b.py file will result in a circular import error
   priority
 />
 
-## Using TYPE_CHECKING
+### Using TYPE_CHECKING
 
 - First import TYPE_CHECKING constant from typing
 - If you are using python 3.6 and below, you can just enter the problematic type as a string

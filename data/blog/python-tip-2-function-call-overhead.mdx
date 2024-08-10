@@ -17,7 +17,7 @@ images: ['/static/images/python-tip-2.jpg']
 
 In this article, we'll see a python performance tip to avoid in your code. I first came across this tip while watching [this talk](https://www.youtube.com/watch?v=YY7yJHo0M5I) on Python performance
 
-## Situation ?
+### Situation ?
 
 You have a hot loop in your code (a loop iterating over many items like the one below, and which can have a serious effect on the program's performance).
 Should you call a function inside this loop ? **Better no**. It's also what Guido van Rossum has suggested [in this post](https://web.archive.org/web/20180919031245/https://plus.google.com/115212051037621986145/posts/HajXHPGN752) for writing faster Python
@@ -26,12 +26,12 @@ Should you call a function inside this loop ? **Better no**. It's also what Guid
 for number in range(1_000_000):
 ```
 
-## Solution
+### Solution
 
 Instead of calling the separate function, **consider performing the operations directly within your loop.** It's for sure not very Pythonic and it's more code, but it's better
 from a performance point of view
 
-## Example
+### Example
 
 You can test this tip from the following example
 
@@ -71,7 +71,7 @@ and running the function b gives the following result
 
 So it's a 48 % performance improvement
 
-## Why is that ?
+### Why is that ?
 
 In a nutshell, a function call requires that a new stack frame is created and pushed into the stack and that operation is **expensive**.
 In addition to that, the python interpreter does no optimization to your code and runs it as it is. You can watch [this talk](https://www.youtube.com/watch?v=smiL_aV1SOc) for more details on how Python implements stack frames.

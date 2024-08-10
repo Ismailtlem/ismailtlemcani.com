@@ -1,10 +1,10 @@
 ---
 title: Taking A Glance At Software Testing, In Particular E2E Web Apps Testing
-date: "2021-04-16"
+date: '2021-04-16'
 tags: ['testing', 'Cypress', 'react', 'web-development', 'code-quality', 'JavaScript']
 draft: false
 summary: Software testing from a very simple perspective and in particular, end to end testing for web applications
-images: ["/static/images/software-testing-preview.jpg"]
+images: ['/static/images/software-testing-preview.jpg']
 ---
 
 <Image
@@ -17,12 +17,12 @@ images: ["/static/images/software-testing-preview.jpg"]
 
 In this article, we will try to explain software testing from a very simple perspective and look in particular into end to end testing of web applications. We will also explore Cypress which is a very popular tool used in end to end testing of web applications.
 
-## What is Software testing ?
+### What is Software testing ?
 
 Software testing is, simply, the act of verifying that some software does confirm to the expected outcomes.
 The academic definition of software testing, is according to the IEEE Standard Glossary of Software Engineering IEEE 610.12-1990 “Testing is the process of exercising a system by manual or automatic means to verify that it satisfies specified requirements or to identify differences between actual and expected results”
 
-## What is Software testing in practice ?
+### What is Software testing in practice ?
 
 The testing activity is basically only about executing a software and verifying that its results confirms to the original requirements.
 
@@ -32,23 +32,17 @@ A test case is defined, according to the [ISTQB glossary](https://glossary.istqb
 
 If, for some particular feature, the output of the software under test equals the expected outcome, the test case made for that purpose should pass. Otherwise, the test case should fail.
 
-## What is end to end testing ?
+### What is end to end testing ?
 
 In simple terms, end to end testing is a level of testing that involves testing an application's workflow from beginning to end. We will go through a popular tool used for end to end testing of web applications in the next sections.
 
-## Popular tool for end to end testing of web applications : Cypress
+### Popular tool for end to end testing of web applications : Cypress
 
 Cypress is a testing framework for testing web applications. Cypress is usually used for end to end testing of web applications but can also be used for unit testing and integration testing.
 
-<Image
-  alt={`Cypress`}
-  src={`/images/cypress.png`}
-  width={1440}
-  height={960}
-  priority
-/>
+<Image alt={`Cypress`} src={`/images/cypress.png`} width={1440} height={960} priority />
 
-## Installing Cypress
+### Installing Cypress
 
 You can refer to Cypress [official documentation](https://docs.cypress.io/guides/getting-started/installing-cypress#Installing) to see specific details on how to install Cypress in your specific environment.
 If you are using npm, you can install Cypress only by :
@@ -57,7 +51,7 @@ If you are using npm, you can install Cypress only by :
 npm i cypress --save-dev
 ```
 
-## Configure Cypress
+### Configure Cypress
 
 For the steps below, you'll need node and npm installed on your machine. Start by creating a react app in your local folder by running the following command :
 
@@ -95,7 +89,7 @@ You can then configure Cypress for doing end to end testing from the following w
   priority
 />
 
-## Start with Cypress
+### Start with Cypress
 
 Move to the package.json file and add the following line
 
@@ -123,9 +117,9 @@ touch first-cypress-test.cy.js
 Paste the following code into your test file
 
 ```javascript
-describe("First test", () => {
-  it("Test that the page can be visited", () => {
-    cy.visit("http://localhost:3000");
+describe('First test', () => {
+  it('Test that the page can be visited', () => {
+    cy.visit('http://localhost:3000');
   });
 });
 ```
@@ -146,18 +140,18 @@ Your react app should also be started. Click on your created test file "first-cy
   priority
 />
 
-## Add more tests
+### Add more tests
 
 You can, as an example, test the redirection to the react website by adding the following code in your test file
 
 ```javascript
-it("Test the redirection", () => {
-  cy.visit("http://localhost:3000");
-  cy.contains("a", "Learn React")
-    .should("have.attr", "href", "https://reactjs.org")
+it('Test the redirection', () => {
+  cy.visit('http://localhost:3000');
+  cy.contains('a', 'Learn React')
+    .should('have.attr', 'href', 'https://reactjs.org')
     .click()
     .then((link) => {
-      cy.request(link.prop("href")).its("status").should("eq", 200);
+      cy.request(link.prop('href')).its('status').should('eq', 200);
     });
 });
 ```
@@ -172,15 +166,15 @@ when you execute that test file, it will give the following output
   priority
 />
 
-## Cypress cheat sheet
+### Cypress cheat sheet
 
 You can refer to this [great cheat sheet](https://cheatography.com/aiqbal/cheat-sheets/cypress-io/) to see the most used functions with Cypress
 
-## Real test cases of a production app
+### Real test cases of a production app
 
 You can refer to this real world [payment app](https://github.com/cypress-io/cypress-realworld-app/tree/develop/cypress/tests) made by Cypress to see real examples of using Cypress functions.
 
-## Final words
+### Final words
 
 The testing activity is simply the activity done to test the behavior of some software to prevent bugs happening in the futur.
 

@@ -1,10 +1,10 @@
 ---
 title: Easily configure Prettier with ESLint
-date: "2023-07-23"
+date: '2023-07-23'
 tags: [ESLint, JavaScript, nodejs, Prettier, formatting]
 draft: false
-summary: "How to configure Prettier and ESLint easily"
-images: ["/static/images/eslintandprettier.png"]
+summary: 'How to configure Prettier and ESLint easily'
+images: ['/static/images/eslintandprettier.png']
 ---
 
 <Image
@@ -17,13 +17,13 @@ images: ["/static/images/eslintandprettier.png"]
 
 In this article, we'll see how you can configure Prettier with ESLint easily
 
-## Should you use Prettier ? Should you use a code formatter in general ?
+### Should you use Prettier ? Should you use a code formatter in general ?
 
 Yes. Code formatting tools are great because they generally provide easy to use tools to automatically format your code by following a set of rules that you can customize. By using them, we eliminate the need for manual formatting and therefore won't have to worry about coding style.
 
 If you have Prettier set up, you can configure it to automatically format your file on save. That way, you will never need to worry about coding style anymore.
 
-## Add Prettier to ESLint configuration
+### Add Prettier to ESLint configuration
 
 You can configure Prettier in a way that ESLint takes it into consideration like a plugin. Prettier errors and warnings will appear in ESLint execution output.
 To do so, it's very simple :
@@ -37,12 +37,12 @@ npm i eslint-config-prettier eslint-plugin-prettier --save-dev
 
 - Next, you just need to add **plugin:prettier/recommended** as the last extension in your **.eslintrc** file and you're done
 
-## Example ?
+### Example ?
 
 For the following simple JavaScript file
 
 ```javascript
-var name = "Ismail Tlemcani";
+var name = 'Ismail Tlemcani';
 console.log(name);
 ```
 
@@ -54,7 +54,7 @@ If you have Prettier configured to work with ESLint, running ESLint will give th
   2:18  error    Insert `;`                                             prettier/prettier
 ```
 
-## Custom config for Prettier ?
+### Custom config for Prettier ?
 
 You can add your own custom rules that Prettier will take into consideration when formatting by adding a file named **.prettierrc** and adding your rules there.
 As an example, if you want to keep single quotes in your file, you can add the following rule in your **.prettierrc** file
