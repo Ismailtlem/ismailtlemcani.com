@@ -1,9 +1,9 @@
-import headerNavLinks from '@/data/headerNavLinks'
-import siteMetadata from '@/data/siteMetadata'
-import Link from './Link'
-import MobileNav from './MobileNav'
-import SearchButton from './SearchButton'
-import ThemeSwitch from './ThemeSwitch'
+import headerNavLinks from '@/data/headerNavLinks';
+import Link from './Link';
+import MobileNav from './MobileNav';
+import SearchButton from './SearchButton';
+import siteMetadata from '@/data/siteMetadata';
+import ThemeSwitch from './ThemeSwitch';
 
 const Header = () => {
   return (
@@ -38,7 +38,7 @@ const Header = () => {
         <MobileNav />
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
