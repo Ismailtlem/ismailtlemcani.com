@@ -1,14 +1,14 @@
-import ResumeLayout from '@/layouts/ResumeLayout'
-import { genPageMetadata } from 'app/seo'
-import { allResumes, Resume } from 'contentlayer/generated'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
-import { coreContent } from 'pliny/utils/contentlayer'
+import { allResumes, Resume } from 'contentlayer/generated';
+import { coreContent } from 'pliny/utils/contentlayer';
+import { genPageMetadata } from 'app/seo';
+import { MDXLayoutRenderer } from 'pliny/mdx-components';
+import ResumeLayout from '@/layouts/ResumeLayout';
 
-export const metadata = genPageMetadata({ title: 'Resume' })
+export const metadata = genPageMetadata({ title: 'Resume' });
 
 export default function Page() {
-  const resume = allResumes.find((p) => p.slug === 'resume') as Resume
-  const mainContent = coreContent(resume)
+  const resume = allResumes.find((p) => p.slug === 'resume') as Resume;
+  const mainContent = coreContent(resume);
 
   return (
     <>
@@ -16,5 +16,5 @@ export default function Page() {
         <MDXLayoutRenderer code={resume.body.code} />
       </ResumeLayout>
     </>
-  )
+  );
 }

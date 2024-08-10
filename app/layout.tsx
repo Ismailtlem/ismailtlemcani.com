@@ -1,23 +1,23 @@
-import 'css/tailwind.css'
-import 'pliny/search/algolia.css'
+import 'css/tailwind.css';
+import 'pliny/search/algolia.css';
+import Footer from '@/components/Footer';
+import SectionContainer from '@/components/SectionContainer';
 
-import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import siteMetadata from '@/data/siteMetadata';
 
-import { Space_Grotesk } from 'next/font/google'
-import { SearchProvider, SearchConfig } from 'pliny/search'
-import Header from '@/components/Header'
-import SectionContainer from '@/components/SectionContainer'
-import Footer from '@/components/Footer'
-import siteMetadata from '@/data/siteMetadata'
-import { ThemeProviders } from './theme-providers'
-import { Metadata } from 'next'
-import { Analytics } from '@vercel/analytics/react'
+import { Metadata } from 'next';
+import { SearchConfig, SearchProvider } from 'pliny/search';
+import { Space_Grotesk } from 'next/font/google';
+import { ThemeProviders } from './theme-providers';
+import Header from '@/components/Header';
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-space-grotesk',
-})
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: [siteMetadata.socialBanner],
   },
-}
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -93,5 +93,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </ThemeProviders>
       </body>
     </html>
-  )
+  );
 }
