@@ -1,10 +1,10 @@
-import type { Resume } from 'contentlayer/generated'
+import type { Resume } from 'contentlayer/generated';
 
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
 
 interface Props {
-  children: ReactNode
-  content: Omit<Resume, '_id' | '_raw' | 'body'>
+  children: ReactNode;
+  content: Omit<Resume, '_id' | '_raw' | 'body'>;
 }
 
 export default function ResumeLayout({ children }: Props) {
@@ -21,5 +21,5 @@ export default function ResumeLayout({ children }: Props) {
         </main>
       </div>
     </>
-  )
+  );
 }

@@ -1,31 +1,31 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-'use client'
+'use client';
 
-import Image from '@/components/Image'
-import Link from '@/components/Link'
-import Tag from '@/components/Tag'
-import siteMetadata from '@/data/siteMetadata'
-import type { Blog } from 'contentlayer/generated'
-import { usePathname } from 'next/navigation'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import { formatDate } from 'pliny/utils/formatDate'
+import { CoreContent } from 'pliny/utils/contentlayer';
+import { formatDate } from 'pliny/utils/formatDate';
+import { usePathname } from 'next/navigation';
+import Image from '@/components/Image';
+import Link from '@/components/Link';
+import siteMetadata from '@/data/siteMetadata';
+import Tag from '@/components/Tag';
+import type { Blog } from 'contentlayer/generated';
 
 interface PaginationProps {
-  totalPages: number
-  currentPage: number
+  totalPages: number;
+  currentPage: number;
 }
 interface ListLayoutProps {
-  posts: CoreContent<Blog>[]
-  title: string
-  initialDisplayPosts?: CoreContent<Blog>[]
-  pagination?: PaginationProps
+  posts: CoreContent<Blog>[];
+  title: string;
+  initialDisplayPosts?: CoreContent<Blog>[];
+  pagination?: PaginationProps;
 }
 
 function Pagination({ totalPages, currentPage }: PaginationProps) {
-  const pathname = usePathname()
-  const basePath = pathname.split('/')[1]
-  const prevPage = currentPage - 1 > 0
-  const nextPage = currentPage + 1 <= totalPages
+  const pathname = usePathname();
+  const basePath = pathname.split('/')[1];
+  const prevPage = currentPage - 1 > 0;
+  const nextPage = currentPage + 1 <= totalPages;
 
   return (
     <div className="space-y-2 pb-8 pt-6 md:space-y-5">
@@ -58,7 +58,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
         )}
       </nav>
     </div>
-  )
+  );
 }
 
 export default function ListLayoutWithTags({
@@ -67,7 +67,7 @@ export default function ListLayoutWithTags({
   initialDisplayPosts = [],
   pagination,
 }: ListLayoutProps) {
-  const displayPosts = initialDisplayPosts.length > 0 ? initialDisplayPosts : posts
+  const displayPosts = initialDisplayPosts.length > 0 ? initialDisplayPosts : posts;
 
   return (
     <>
@@ -81,7 +81,7 @@ export default function ListLayoutWithTags({
           <div>
             <ul>
               {displayPosts.map((post) => {
-                const { path, date, images, title, summary, tags } = post
+                const { path, date, images, title, summary, tags } = post;
                 return (
                   <li key={path} className="py-5">
                     <article className="space-y-2 flex flex-col xl:space-y-0">
@@ -107,7 +107,7 @@ export default function ListLayoutWithTags({
                                   height={100}
                                 />
                               </div>
-                            )
+                            );
                           })}
                         <div>
                           <div>
@@ -127,7 +127,7 @@ export default function ListLayoutWithTags({
                       </div>
                     </article>
                   </li>
-                )
+                );
               })}
             </ul>
             {pagination && pagination.totalPages > 1 && (
@@ -137,5 +137,5 @@ export default function ListLayoutWithTags({
         </div>
       </div>
     </>
-  )
+  );
 }

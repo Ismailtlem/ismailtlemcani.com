@@ -1,32 +1,32 @@
-import Image from '@/components/Image'
-import Link from '@/components/Link'
-import PageTitle from '@/components/PageTitle'
-import ScrollTopAndComment from '@/components/ScrollTopAndComment'
-import SectionContainer from '@/components/SectionContainer'
-import Tag from '@/components/Tag'
-import siteMetadata from '@/data/siteMetadata'
-import type { Authors, Blog } from 'contentlayer/generated'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import { ReactNode } from 'react'
+import { CoreContent } from 'pliny/utils/contentlayer';
+import { ReactNode } from 'react';
+import Image from '@/components/Image';
+import Link from '@/components/Link';
+import PageTitle from '@/components/PageTitle';
+import ScrollTopAndComment from '@/components/ScrollTopAndComment';
+import SectionContainer from '@/components/SectionContainer';
+import siteMetadata from '@/data/siteMetadata';
+import Tag from '@/components/Tag';
+import type { Authors, Blog } from 'contentlayer/generated';
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   weekday: 'long',
   year: 'numeric',
   month: 'long',
   day: 'numeric',
-}
+};
 
 interface LayoutProps {
-  content: CoreContent<Blog>
-  authorDetails: CoreContent<Authors>[]
-  next?: { path: string; title: string }
-  prev?: { path: string; title: string }
-  children: ReactNode
+  content: CoreContent<Blog>;
+  authorDetails: CoreContent<Authors>[];
+  next?: { path: string; title: string };
+  prev?: { path: string; title: string };
+  children: ReactNode;
 }
 
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
-  const { path, date, title, tags } = content
-  const basePath = path.split('/')[0]
+  const { path, date, title, tags } = content;
+  const basePath = path.split('/')[0];
 
   return (
     <SectionContainer>
@@ -142,5 +142,5 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
         </div>
       </article>
     </SectionContainer>
-  )
+  );
 }

@@ -1,15 +1,15 @@
-import Image from '@/components/Image'
-import SocialIcon from '@/components/social-icons'
-import type { Authors } from 'contentlayer/generated'
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
+import Image from '@/components/Image';
+import SocialIcon from '@/components/social-icons';
+import type { Authors } from 'contentlayer/generated';
 
 interface Props {
-  children: ReactNode
-  content: Omit<Authors, '_id' | '_raw' | 'body'>
+  children: ReactNode;
+  content: Omit<Authors, '_id' | '_raw' | 'body'>;
 }
 
 export default function AuthorLayout({ children, content }: Props) {
-  const { name, avatar, occupation, company, email, twitter, linkedin, github } = content
+  const { name, avatar, occupation, company, email, twitter, linkedin, github } = content;
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -45,5 +45,5 @@ export default function AuthorLayout({ children, content }: Props) {
         </div>
       </div>
     </>
-  )
+  );
 }
