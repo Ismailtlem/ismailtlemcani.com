@@ -1,6 +1,6 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Ismail Tlemcani - Software Developer',
+  title: 'Ismail Tlemcani - Software Developer - France',
   author: 'Ismail Tlemcani',
   headerTitle: 'Home',
   description:
