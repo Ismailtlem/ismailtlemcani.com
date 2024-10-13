@@ -1,0 +1,113 @@
+---
+title: 'DevOps journey step 2 : Baby steps in Kubernetes'
+date: '2024-10-12'
+tags: ['python', 'kubernetes', 'devops']
+draft: false
+summary: First steps into Kubernetes
+images: ['/static/images/kubernetes.png']
+---
+
+As a newbie in kubernetes world, I will try to share what I've learned on that topic. This is just a few things from my learnings and it's very far from covering every kubernetes concept.
+
+## What is the problem that Kubernetes solves ?
+
+In any classic app where you have multiple components (frontend, backend, database, some job, ... ) interacting with each other, and if we are using some
+containerization technology to deploy the different components in the environment where the users will be able to access them, some problems might show up if you are doing all this manually.
+
+The main problem is the fact that each container would need to be manually started, stopped, scaled if there is a need to handle more load. This can be a burden especially when you have to manage potential failures.
+
+This is where an orchestration tool like kubernetes (or Docker Swarm, or any other tool) can help.
+
+## What is an orchestration technology tool ?
+
+In a nutshell, those are tools that are used for automatically deploying, scaling up or down and managing containers
+
+<Image
+  alt={`orchestration-tool`}
+  src={`/static/images/orchestration-tool.png`}
+  width={500}
+  height={500}
+  priority
+/>
+
+Kubernetes is one of them.
+
+## Main benefit of using a tool like Kubernetes
+
+Kubernetes (or any other similar tool) can be helpful in many things such as :
+
+- Handling potential failures of an app, and automatically restarting it.
+- Distributing the load so that no part of the system is overloaded.
+- Scaling your system up or down based on the load you have.
+
+Plus other benefits ...
+
+## Is this necessary ?
+
+I am not an DevOps expert, but I don't think that using orchestration tools is necessary in every project. I have seen many projects where they are not used. However, in apps like streaming services or social media platforms where there is a constant need for scaling up or down, such tools can be very useful.
+
+## How does the deployment process go in a nutshell using those tools ?
+
+In general, in a classical web app, you'll have some frontend app, some backend app, a database and maybe some other external services
+
+- When we are ready to deploy our app, you'll have to create container images of all our components using a containerization technology like Docker. The image created will have the code and all the dependencies needed
+- Next, you'll have to push this image to some container registry like AWS ECR or Docker Hub so that the images can be accessed during the deployment
+- After that, you'll have to write configuration files that will say how and where our app should run in the cluster. In practice, we say in those files what each kubernetes object (service, pods, config maps, ...) should have and how they are linked together.
+
+- The final step is simply to deploy all those kubernetes objects defined earlier
+
+## Main kubernetes components ?
+
+- **Cluster** : This is the big component. It is a set of Nodes where we are managing the workload of our app
+
+<Image
+  alt={`k8s-cluster`}
+  src={`/static/images/k8s-cluster.png`}
+  width={500}
+  height={500}
+  priority
+/>
+
+- **Node** : It is a single machine where our app runs. It is a machine, physical or virtual on which kubernetes is installed. There are 2 types of nodes : _A master node_ that controls the cluster and is responsible for making global decisions about the cluster and _Worker nodes_ where the containers are deployed. Your container will live inside worker nodes.
+
+  <Image
+    alt={`node`}
+    src={`/static/images/k8s-master-worker-nodes.png`}
+    width={900}
+    height={900}
+    priority
+  />
+
+- **Pods** : It's a kubernetes object and it's the smallest unit that will encapsulate the containers.
+
+- **Replication Set** : Simply, it is a group of the same pod. We create this for mainly 2 reasons : High availability and load balancing.
+
+- **Deployment** : It is a kubernetes object, one level up above the replica set. It is what is used to scale up or down, or manage the fleet of Pods
+
+<Image
+  alt={`k8s-deploy-object`}
+  src={`/static/images/k8s-deploy-object.png`}
+  width={500}
+  height={500}
+  priority
+/>
+
+- **Services** : A Kubernetes Service is an object (just like pods, replicasets, …) that is enabling communication between Pods and external systems or other Pods within the cluster.
+
+This is not a complete list. There are other kubernetes object like jobs, config maps, ..., that each serve a specific need. Here is a [blog post](https://kodekloud.com/blog/kubernetes-objects/) with the list of the objects that are mostly used.
+
+To deploy your app in your kubernetes cluster, you don't need to define configuration files for all those objects. At a base level from my understanding, you can only just define the pod, the service, and the deployment object.
+
+## Tools to interact with those objects ?
+
+The main one is **Kubectl** which is a CLI tool used to manage your kubernetes cluster and objects. See the most used command in this [doc] (https://kubernetes.io/docs/reference/kubectl/quick-reference/)
+
+## Learn kubernetes ?
+
+There are many resources to learn kubernetes. Here are few ones where I am continuing my learnings :
+
+- **kodekloud**: This is a great paid learning platform to learn many DevOps technologies. I learnt so many things and I am still learning many things there. I am not related to this platform in any way. This is just only a personal experience.
+
+- **official doc**: Like any technology, official documentation is always a place to keep an eye on. Especially, the [concepts](https://kubernetes.io/docs/concepts/) section is the one that is explaining all the needed concepts
+
+- **redhat tutorial**: Redhat also have a series of well written articles in their [blog](https://www.redhat.com/en/topics/containers/learning-kubernetes-tutorial#overview) that can be useful for people getting started in their kubernetes journey to understand the different concepts.
