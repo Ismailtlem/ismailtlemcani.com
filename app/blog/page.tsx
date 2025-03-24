@@ -1,7 +1,7 @@
+import ListLayout from '@/layouts/ListLayoutWithTags';
+import { genPageMetadata } from 'app/seo';
 import { allBlogs } from 'contentlayer/generated';
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer';
-import { genPageMetadata } from 'app/seo';
-import ListLayout from '@/layouts/ListLayoutWithTags';
 
 const POSTS_PER_PAGE = 5;
 
@@ -24,7 +24,7 @@ export default function BlogPage() {
       posts={posts}
       initialDisplayPosts={initialDisplayPosts}
       pagination={pagination}
-      title="All Posts"
+      title="All Tags"
     />
   );
 }

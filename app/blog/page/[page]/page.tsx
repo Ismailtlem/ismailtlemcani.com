@@ -1,6 +1,6 @@
+import ListLayout from '@/layouts/ListLayoutWithTags';
 import { allBlogs } from 'contentlayer/generated';
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer';
-import ListLayout from '@/layouts/ListLayoutWithTags';
 
 const POSTS_PER_PAGE = 5;
 
@@ -28,7 +28,7 @@ export default function Page({ params }: { params: { page: string } }) {
       posts={posts}
       initialDisplayPosts={initialDisplayPosts}
       pagination={pagination}
-      title="All Posts"
+      title="All Tags"
     />
   );
 }
