@@ -1,0 +1,183 @@
+---
+title: 'ASGI ? What is it simply ?'
+date: '2025-04-20'
+tags: ['web']
+draft: false
+summary: What is ASGI ?
+images: ['/static/images/asgi-app.png']
+---
+
+This post is about explaining simply the ASGI specification. The link to the complete specification is [here](https://asgi.readthedocs.io/en/latest/index.html).  
+
+## What is ASGI ? Simply ?
+
+ASGI stands for Asynchronous Server Gateway Interface. It's a specification for web servers and Python web applications or frameworks, 
+to promote web application portability across a variety of web servers.
+ASGI is the successor of WSGI. 
+
+## Difference between web servers and web frameworks like Django, flask .. ? 
+
+I confused the 2 terms for a long time because of the fact that they are sometimes used interchangeably, but there are differences and they have different responsabilities. 
+Let's cite some :
+- Web frameworks like Django, fastapi, flask are mainly responsible for handling routing and handling the endpoints logic
+- Web servers like uvicorn are responsible for managing the http connection with the client, parsing the incoming HTTP connection, and converting it to a ASGI object that will be passed to the web frameworks
+
+In summary, when a request is sent from a client : 
+- The web server (uvicorn as an example) receives the request
+- The web server forward the request to the web framework (flask or fastapi) that will processes the request 
+- The web framework returns a response object to the web server
+- The web server will return the response to the client
+
+
+## Basic ASGI app ?
+
+Here is how a basic ASGI app can look like in its simplest form : 
+```python
+
+async def asgi_app(scope, receive, send):
+    event = await receive()
+    ...
+    return send({'type': 'websocket.send', ...})
+```
+
+A basic asgi app accepts 3 parameters : 
+- **scope** : It is a dictionary containing information about the connection, a basic scope might look like this 
+```python
+{
+    'type': 'http',
+    'path': '/users/',
+    'headers': [
+        (b'Authorization', b'Bearer mytoken'),
+    ],
+}
+```
+- **receive event** : It is an asynchronous callable that the asgi app calls to receive events/messages from either the client or server
+It is called like this : 
+
+```python
+message = await receive()
+```
+The value of the receive event might look like this 
+```python
+{
+    "type": "http.request",
+    "body": b"some raw bytes of the request body",
+    "more_body": False  }
+```
+
+- **send event** : It is also an asynchronous callable, and it is used to send data to the client.
+Here is an example of how this parameter can be used 
+
+```python
+await send({
+    "type": "http.response.start",
+    "status": 200,
+    "headers": [
+        [b"content-type", b"text/plain"],
+        [b"x-custom-header", b"my-value"]
+    ]
+}
+)
+```
+## How will the ASGI server find our ASGI callable function code ? 
+
+When we run an ASGI server like uvicorn, like doing *uvicorn --host=0.0.0.0 main:app*, we specify the module that contains our main ASGI callable code. 
+We also specify the main callable function. Then the server will import the app module, look for the async callable function, and then handle the request lifecycle (scope, receive, send).
+
+## Hello world **ASGI** app
+Below you'll find a simple hello world app, using the concepts above
+
+```python
+async def app(scope, receive, send):
+    assert scope["type"] == "http"  ## We usually start by checking the type and the method specified in the scope
+    assert scope["method"] == "GET"
+    msg = await receive()
+    await send(
+        {
+            "type": "http.response.start",
+            "status": 200,
+            "headers": [[b"content-type", b"text/plain"]],
+        }
+    )
+
+    await send(
+        {
+            "type": "http.response.body",
+            "body": b"Hello, world!",
+        }
+    )
+
+```
+You can run this code with *uvicorn* and you'll get Hello world
+
+## ASGI app using starlette 
+
+Some Python framework, like starlette, offer the option to be used as a complete framework, or as an ASGI toolkit where you can define the ASGI server manually.
+Here is a simple example taken from their [README file](https://github.com/encode/starlette?tab=readme-ov-file#framework-or-toolkit)
+
+
+```python
+from starlette.responses import PlainTextResponse
+
+async def app(scope, receive, send):
+    assert scope['type'] == 'http'
+    response = PlainTextResponse('Hello, world!')
+    await response(scope, receive, send)
+```
+
+Here is another example, where starlette is used both as a web server and as a web framework
+```python
+
+from starlette.applications import Starlette
+from starlette.requests import Request
+from starlette.responses import PlainTextResponse
+from starlette.routing import Route
+
+async def home(request: Request):
+    return PlainTextResponse("Home")
+
+
+async def hello(request: Request):
+    return PlainTextResponse("Hello")
+
+
+starlette_app = Starlette(
+    debug=True,
+    routes=[
+        Route("/", home),
+        Route("/hello", hello),
+    ],
+)
+
+async def app(scope, receive, send):
+
+    await starlette_app(scope, receive, send)
+```
+## Lifespan protocol ?
+It is a specification that defines what the ASGI server does, in some specific events, such as startup and shutdown within ASGI.
+Here is a simple implementation
+
+```python
+
+from starlette.responses import PlainTextResponse
+
+
+async def app(scope, receive, send):
+    if scope["type"] == "lifespan":
+        while True:
+            message = await receive()
+            if message["type"] == "lifespan.startup":
+                print("Do something at startup")
+                await send({"type": "lifespan.startup.complete"})
+            elif message["type"] == "lifespan.shutdown":
+                print("Do something at shutdown")
+                await send({"type": "lifespan.shutdown.complete"})
+                return
+    else:
+        response = PlainTextResponse("Hello, world!")
+    await response(scope, receive, send)
+```
+
+## Summary
+All the concepts above are just a basic introduction, there is more to know on this topic. Do not hesitate to look into the documentation for any more explanation.
+I would also be very happy to discuss further and learn more on this topic with anyone interested.
