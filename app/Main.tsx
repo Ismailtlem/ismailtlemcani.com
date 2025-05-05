@@ -7,7 +7,7 @@ export default function Home() {
             I'm Ismail Tlemcani
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            a Software Developer, working with Web technologies. I'am living in Paris at the moment.
+            a Software Developer, working with Web technologies. I'm living in Paris at the moment.
           </p>
 
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
