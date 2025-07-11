@@ -1,17 +1,18 @@
 import 'css/prism.css';
 import 'katex/dist/katex.css';
 
-import { allBlogs, allAuthors } from 'contentlayer/generated';
 import { components } from '@/components/MDXComponents';
-import { MDXLayoutRenderer } from 'pliny/mdx-components';
-import { Metadata } from 'next';
-import { sortPosts, coreContent, allCoreContent } from 'pliny/utils/contentlayer';
 import PageTitle from '@/components/PageTitle';
+import siteMetadata from '@/data/siteMetadata';
 import PostBanner from '@/layouts/PostBanner';
 import PostLayout from '@/layouts/PostLayout';
 import PostSimple from '@/layouts/PostSimple';
-import siteMetadata from '@/data/siteMetadata';
+import { genPageMetadata } from 'app/seo';
 import type { Authors, Blog } from 'contentlayer/generated';
+import { allAuthors, allBlogs } from 'contentlayer/generated';
+import { Metadata } from 'next';
+import { MDXLayoutRenderer } from 'pliny/mdx-components';
+import { allCoreContent, coreContent, sortPosts } from 'pliny/utils/contentlayer';
 
 const defaultLayout = 'PostLayout';
 const layouts = {
@@ -43,34 +44,16 @@ export async function generateMetadata({
   if (post.images) {
     imageList = typeof post.images === 'string' ? [post.images] : post.images;
   }
-  const ogImages = imageList.map((img) => {
-    return {
-      url: img.includes('http') ? img : siteMetadata.siteUrl + img,
-    };
-  });
-
-  return {
+  const canonicalUrl = post.canonicalUrl || `${siteMetadata.siteUrl}/${post.path}`;
+  return genPageMetadata({
     title: post.title,
     description: post.summary,
-    openGraph: {
-      title: post.title,
-      description: post.summary,
-      siteName: siteMetadata.title,
-      locale: 'en_US',
-      type: 'article',
-      publishedTime: publishedAt,
-      modifiedTime: modifiedAt,
-      url: './',
-      images: ogImages,
-      authors: authors.length > 0 ? authors : [siteMetadata.author],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.summary,
-      images: imageList,
-    },
-  };
+    image: imageList[0],
+    canonicalUrl,
+    publishedTime: publishedAt,
+    modifiedTime: modifiedAt,
+    author: authors.length > 0 ? authors[0] : siteMetadata.author,
+  });
 }
 
 export const generateStaticParams = async () => {

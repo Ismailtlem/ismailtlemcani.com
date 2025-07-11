@@ -1,13 +1,14 @@
-import { CoreContent } from 'pliny/utils/contentlayer';
-import { ReactNode } from 'react';
 import Image from '@/components/Image';
+import JsonLd, { BreadcrumbJsonLd } from '@/components/JsonLd';
 import Link from '@/components/Link';
 import PageTitle from '@/components/PageTitle';
 import ScrollTopAndComment from '@/components/ScrollTopAndComment';
 import SectionContainer from '@/components/SectionContainer';
-import siteMetadata from '@/data/siteMetadata';
 import Tag from '@/components/Tag';
+import siteMetadata from '@/data/siteMetadata';
 import type { Authors, Blog } from 'contentlayer/generated';
+import { CoreContent } from 'pliny/utils/contentlayer';
+import { ReactNode } from 'react';
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   weekday: 'long',
@@ -25,13 +26,47 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
-  const { path, date, title, tags } = content;
+  const { path, date, title, tags, summary } = content;
   const basePath = path.split('/')[0];
-
+  const author = authorDetails[0];
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description: summary,
+    datePublished: date,
+    author: {
+      '@type': 'Person',
+      name: author?.name,
+      url: author?.twitter || author?.github || author?.linkedin || undefined,
+    },
+    image: content.images && content.images.length > 0 ? [content.images[0]] : [siteMetadata.socialBanner],
+    url: `${siteMetadata.siteUrl}/${path}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${siteMetadata.siteUrl}/${path}`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteMetadata.title,
+      logo: {
+        '@type': 'ImageObject',
+        url: siteMetadata.siteLogo || siteMetadata.socialBanner,
+      },
+    },
+  };
   return (
     <SectionContainer>
       <ScrollTopAndComment />
       <article>
+        <BreadcrumbJsonLd
+          items={[
+            { name: 'Home', url: siteMetadata.siteUrl },
+            { name: 'Blog', url: `${siteMetadata.siteUrl}/blog` },
+            { name: title, url: `${siteMetadata.siteUrl}/${path}` },
+          ]}
+        />
+        <JsonLd data={jsonLd} />
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
           <header className="pt-6 xl:pb-6">
             <div className="space-y-1 text-center">
