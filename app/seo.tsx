@@ -12,7 +12,16 @@ interface PageSEOProps {
   [key: string]: any;
 }
 
-export function genPageMetadata({ title, description, image, canonicalUrl, publishedTime, modifiedTime, author, ...rest }: PageSEOProps): Metadata {
+export function genPageMetadata({
+  title,
+  description,
+  image,
+  canonicalUrl,
+  publishedTime,
+  modifiedTime,
+  author,
+  ...rest
+}: PageSEOProps): Metadata {
   return {
     title,
     openGraph: {
@@ -34,8 +43,8 @@ export function genPageMetadata({ title, description, image, canonicalUrl, publi
     },
     alternates: canonicalUrl
       ? {
-        canonical: canonicalUrl,
-      }
+          canonical: canonicalUrl,
+        }
       : undefined,
     ...rest,
   };
