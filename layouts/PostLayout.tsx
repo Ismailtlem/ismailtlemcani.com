@@ -40,7 +40,10 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
       name: author?.name,
       url: author?.twitter || author?.github || author?.linkedin || undefined,
     },
-    image: content.images && content.images.length > 0 ? [content.images[0]] : [siteMetadata.socialBanner],
+    image:
+      content.images && content.images.length > 0
+        ? [content.images[0]]
+        : [siteMetadata.socialBanner],
     url: `${siteMetadata.siteUrl}/${path}`,
     mainEntityOfPage: {
       '@type': 'WebPage',
