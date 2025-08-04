@@ -11,7 +11,7 @@ const siteMetadata = {
   siteRepo: 'https://github.com/Ismailtlem/ismailtlemcani.com',
   siteLogo: '/static/favicons/favicon.ico',
   socialBanner: '/static/favicons/favicon.ico',
-  email: 'ismail@ismailtlemcani.com',
+  email: 'ismail.tlemcani@gmail.com',
   github: 'https://github.com/Ismailtlem',
   twitter: 'https://twitter.com/Ismailtlem',
   linkedin: 'https://www.linkedin.com/in/ismailtlemcani',

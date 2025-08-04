@@ -29,3 +29,258 @@ input:-webkit-autofill:focus {
     background-color 600000s 0s,
     color 600000s 0s;
 }
+
+/* Terminal scrollbar styling */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #374151;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #10b981;
+  border-radius: 2px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #059669;
+}
+
+/* Subtle glow for code elements */
+code {
+  position: relative;
+}
+
+/* Terminal cursor animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.terminal-cursor::after {
+  content: '_';
+  animation: blink 1s infinite;
+  color: #10b981;
+}
+
+/* Hacker-style glitch effect for blog titles */
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-1px, 1px); }
+  40% { transform: translate(-1px, -1px); }
+  60% { transform: translate(1px, 1px); }
+  80% { transform: translate(1px, -1px); }
+}
+
+.hover-glitch:hover {
+  animation: glitch 0.3s ease-in-out;
+}
+
+/* Matrix-style falling code background */
+@keyframes matrix-fall {
+  0% { transform: translateY(-100vh); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.matrix-bg::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 98px,
+    rgba(16, 185, 129, 0.03) 100px
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Terminal-style article cards */
+.terminal-card {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border: 1px solid #10b981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+  position: relative;
+}
+
+.terminal-card::before {
+  content: '●●●';
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  color: #ef4444;
+  font-size: 8px;
+  line-height: 1;
+}
+
+.terminal-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  background: linear-gradient(90deg, #374151 0%, #4b5563 100%);
+  border-bottom: 1px solid #10b981;
+}
+
+/* Hexagonal accent elements */
+.hex-accent {
+  position: relative;
+}
+
+.hex-accent::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 12px;
+  background: #10b981;
+  transform: rotate(60deg) skewX(-30deg) scale(1, 0.866);
+  left: -25px;
+  top: 50%;
+  transform-origin: center;
+  opacity: 0.3;
+}
+
+/* Typing animation for titles */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: #10b981; }
+}
+
+.typing-effect {
+  overflow: hidden;
+  border-right: 2px solid #10b981;
+  white-space: nowrap;
+  animation: typing 2s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+/* Neon glow effects */
+.neon-glow {
+  text-shadow: 0 0 5px #10b981, 0 0 10px #10b981, 0 0 15px #10b981;
+}
+
+.neon-border {
+  box-shadow: 0 0 5px #10b981, inset 0 0 5px #10b981;
+}
+
+/* Code-style selection highlighting */
+::selection {
+  background: #10b981;
+  color: #000;
+}
+
+::-moz-selection {
+  background: #10b981;
+  color: #000;
+}
+
+/* Retro scan lines effect */
+@keyframes scan-lines {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.scan-lines::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #10b981, transparent);
+  animation: scan-lines 3s linear infinite;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.3;
+}
+
+/* Additional hacker-themed elements */
+.binary-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -2;
+  background: linear-gradient(
+    0deg,
+    transparent 70%,
+    rgba(16, 185, 129, 0.05) 100%
+  );
+}
+
+/* Terminal window effect for cards */
+.terminal-window {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.terminal-window::before {
+  content: '● ● ●';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(135deg, #374151, #4b5563);
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  font-size: 12px;
+  color: #ef4444;
+  border-bottom: 1px solid #10b981;
+  z-index: 10;
+}
+
+/* Pulse effect for active elements */
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 5px rgba(16, 185, 129, 0.3); 
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.6); 
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Code block styling */
+pre {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
+  border: 1px solid #10b981 !important;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2) !important;
+}
+
+/* Improve readability for dark theme */
+.dark .terminal-card {
+  background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+  border-color: #10b981;
+}
+
+/* Loading state animations */
+@keyframes load-data {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.loading-bar {
+  height: 2px;
+  background: #10b981;
+  animation: load-data 2s ease-out;
+}

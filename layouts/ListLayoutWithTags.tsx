@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 'use client';
 
+import { slug } from 'github-slugger';
 import Image from '@/components/Image';
 import Link from '@/components/Link';
 import Tag from '@/components/Tag';
-import { slug } from 'github-slugger';
 
+import { CoreContent } from 'pliny/utils/contentlayer';
+import { formatDate } from 'pliny/utils/formatDate';
+import { usePathname } from 'next/navigation';
 import siteMetadata from '@/data/siteMetadata';
 import tagData from 'app/tag-data.json';
 import type { Blog } from 'contentlayer/generated';
-import { usePathname } from 'next/navigation';
-import { CoreContent } from 'pliny/utils/contentlayer';
-import { formatDate } from 'pliny/utils/formatDate';
 
 interface PaginationProps {
   totalPages: number;
@@ -42,11 +42,12 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           <Link
             href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/page/${currentPage - 1}`}
             rel="prev"
+            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
           >
-            Previous
+            ← Previous
           </Link>
         )}
-        <span>
+        <span className="text-gray-500 dark:text-gray-400">
           {currentPage} of {totalPages}
         </span>
         {!nextPage && (
@@ -55,8 +56,12 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           </button>
         )}
         {nextPage && (
-          <Link href={`/${basePath}/page/${currentPage + 1}`} rel="next">
-            Next
+          <Link 
+            href={`/${basePath}/page/${currentPage + 1}`} 
+            rel="next" 
+            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          >
+            Next →
           </Link>
         )}
       </nav>
@@ -79,23 +84,23 @@ export default function ListLayoutWithTags({
 
   return (
     <>
-      <div>
-        <div className="pb-6 pt-6">
-          <h1 className="sm:hidden text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             {title}
           </h1>
         </div>
         <div className="flex sm:space-x-24">
-          <div className="hidden h-full max-h-screen max-w-[280px] min-w-[280px] flex-wrap overflow-auto rounded-sm bg-gray-50 pt-5 shadow-md sm:flex dark:bg-gray-900/70 dark:shadow-gray-800/40">
+          <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded bg-gray-50 pt-5 shadow-md dark:bg-gray-900/70 dark:shadow-gray-800/40 sm:flex">
             <div className="px-6 py-4">
               {pathname.startsWith('/blog') ? (
-                <h3 className="text-primary-500 font-bold uppercase">All Tags</h3>
+                <h3 className="text-primary-500 font-bold uppercase">Tags</h3>
               ) : (
                 <Link
                   href={`/blog`}
-                  className="hover:text-primary-500 dark:hover:text-primary-500 font-bold text-gray-700 uppercase dark:text-gray-300"
+                  className="font-bold uppercase text-gray-700 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500"
                 >
-                  All Tags
+                  All Posts
                 </Link>
               )}
               <ul>
@@ -103,13 +108,13 @@ export default function ListLayoutWithTags({
                   return (
                     <li key={t} className="my-3">
                       {decodeURI(pathname.split('/tags/')[1]) === slug(t) ? (
-                        <h3 className="text-primary-500 inline px-3 py-2 text-sm font-bold uppercase">
+                        <h3 className="inline px-3 py-2 text-sm font-bold uppercase text-primary-500">
                           {`${t} (${tagCounts[t]})`}
                         </h3>
                       ) : (
                         <Link
                           href={`/tags/${slug(t)}`}
-                          className="hover:text-primary-500 dark:hover:text-primary-500 px-3 py-2 text-sm font-medium text-gray-500 uppercase dark:text-gray-300"
+                          className="px-3 py-2 text-sm font-medium uppercase text-gray-500 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500"
                           aria-label={`View posts tagged ${t}`}
                         >
                           {`${t} (${tagCounts[t]})`}
@@ -121,42 +126,38 @@ export default function ListLayoutWithTags({
               </ul>
             </div>
           </div>
-
-          <div>
+          <div className="flex-1">
             <ul>
               {displayPosts.map((post) => {
-                const { path, date, images, title, summary, tags } = post;
+                const { path, date, title, summary, tags, images } = post;
                 return (
                   <li key={path} className="py-5">
-                    <article className="space-y-2 flex flex-col xl:space-y-0">
+                    <article className="flex flex-col space-y-2 xl:space-y-0">
                       <dl>
                         <dt className="sr-only">Published on</dt>
                         <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                           <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
                         </dd>
                       </dl>
-                      <div className="space-y-3 flex flex-row">
-                        {images &&
-                          images.map((image) => {
-                            return (
-                              <div
-                                key={image}
-                                className="mt-5 flex-shrink-0 mr-4 w-full hidden md:block md:w-1/3 lg:w-1/4 overflow-hidden"
-                              >
-                                <Image
-                                  alt="article-image"
-                                  src={image}
-                                  className="object-cover object-center w-full h-full"
-                                  width={100}
-                                  height={100}
-                                />
-                              </div>
-                            );
-                          })}
-                        <div>
-                          <div>
+                      <div className="space-y-3">
+                        <div className="flex items-start space-x-4">
+                          {images && images[0] && (
+                            <div className="flex-shrink-0">
+                              <Image
+                                alt={title}
+                                src={images[0]}
+                                className="h-20 w-20 rounded-lg object-cover"
+                                width={80}
+                                height={80}
+                              />
+                            </div>
+                          )}
+                          <div className="flex-1 min-w-0">
                             <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                              <Link href={`/${path}`} className="text-gray-900 dark:text-gray-100">
+                              <Link
+                                href={`/${path}`}
+                                className="text-gray-900 dark:text-gray-100"
+                              >
                                 {title}
                               </Link>
                             </h2>
@@ -164,9 +165,9 @@ export default function ListLayoutWithTags({
                               {tags?.map((tag) => <Tag key={tag} text={tag} />)}
                             </div>
                           </div>
-                          <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                            {summary}
-                          </div>
+                        </div>
+                        <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                          {summary}
                         </div>
                       </div>
                     </article>

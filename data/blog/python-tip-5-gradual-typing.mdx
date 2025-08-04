@@ -1,0 +1,67 @@
+---
+title: 'Python tip N5 : Gradual typing in python'
+date: '2025-04-26'
+tags: ['python', 'tips']
+draft: false
+summary: How to gradually type a python codebase
+images: ['/static/images/python-lists.jpg']
+---
+
+### Steps
+
+Just run
+
+```bash
+mypy your-app
+```
+
+And see what you get.
+
+Add this to your mypy config to ignore 3rd library imports that are not typed
+
+```sh
+disable_error_code = import-untyped
+```
+
+Run mypy, see what you get, and fix errors you might get
+
+If you have some modules that are untyped, you can install them with
+
+```sh
+mypy --install-types
+```
+
+or with
+
+```sh
+pip install types-modulename
+```
+
+Add those after that
+
+```sh
+strict_equality = True
+strict_concatenate = True
+```
+
+Try after that to make mypy check the functions that are untyped by adding this config (it is false by default)
+
+```sh
+check_untyped_defs = True
+```
+
+As you go by, you can then force having types in your codebase by adding the following
+
+```sh
+disallow_untyped_defs = True
+```
+
+### Tools that can help
+
+You can use some tools to automatically generate types for some parts of your code. Some tools that I found useful are
+https://monkeytype.readthedocs.io/en/latest/index.html, https://github.com/JelleZijlstra/autotyping
+
+- You can run monkeytype on your tests, it will infer the types from your tests and store them in a sqllite db, you can then apply those types to your src folder
+- You can use autotyping to add return types, or arg types in your code
+- mypy-baseline is a tool that you can run on your codebase, and it will keep the state of errors, and only warn about new ones
+- mypy-silent is also a tool that you can use to add type-ignore everywhere ..

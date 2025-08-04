@@ -1,8 +1,8 @@
 import headerNavLinks from '@/data/headerNavLinks';
-import siteMetadata from '@/data/siteMetadata';
 import Link from './Link';
 import MobileNav from './MobileNav';
 import SearchButton from './SearchButton';
+import siteMetadata from '@/data/siteMetadata';
 import ThemeSwitch from './ThemeSwitch';
 
 const Header = () => {
@@ -13,6 +13,7 @@ const Header = () => {
           <div className="flex items-center justify-between">
             {typeof siteMetadata.headerTitle === 'string' ? (
               <div className="hidden h-6 text-2xl font-semibold sm:block">
+                <span className="text-primary-500 font-mono">~/</span>
                 {siteMetadata.headerTitle}
               </div>
             ) : (

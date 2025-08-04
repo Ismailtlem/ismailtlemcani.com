@@ -1,14 +1,14 @@
+import { CoreContent } from 'pliny/utils/contentlayer';
+import { ReactNode } from 'react';
 import Image from '@/components/Image';
 import JsonLd, { BreadcrumbJsonLd } from '@/components/JsonLd';
 import Link from '@/components/Link';
 import PageTitle from '@/components/PageTitle';
 import ScrollTopAndComment from '@/components/ScrollTopAndComment';
 import SectionContainer from '@/components/SectionContainer';
-import Tag from '@/components/Tag';
 import siteMetadata from '@/data/siteMetadata';
+import Tag from '@/components/Tag';
 import type { Authors, Blog } from 'contentlayer/generated';
-import { CoreContent } from 'pliny/utils/contentlayer';
-import { ReactNode } from 'react';
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   weekday: 'long',
@@ -26,7 +26,7 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
-  const { path, date, title, tags, summary } = content;
+  const { path, date, title, tags, summary, images } = content;
   const basePath = path.split('/')[0];
   const author = authorDetails[0];
   const jsonLd = {
@@ -87,6 +87,17 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 <PageTitle>{title}</PageTitle>
               </div>
             </div>
+            {images && images.length > 0 && (
+              <div className="pt-6">
+                <Image
+                  src={images[0]}
+                  alt={title}
+                  width={1200}
+                  height={600}
+                  className="object-cover rounded-lg"
+                />
+              </div>
+            )}
           </header>
           <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
             <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
