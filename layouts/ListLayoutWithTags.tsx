@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 'use client';
 
-import { slug } from 'github-slugger';
 import Image from '@/components/Image';
 import Link from '@/components/Link';
 import Tag from '@/components/Tag';
+import { slug } from 'github-slugger';
 
-import { CoreContent } from 'pliny/utils/contentlayer';
-import { formatDate } from 'pliny/utils/formatDate';
-import { usePathname } from 'next/navigation';
 import siteMetadata from '@/data/siteMetadata';
 import tagData from 'app/tag-data.json';
 import type { Blog } from 'contentlayer/generated';
+import { usePathname } from 'next/navigation';
+import { CoreContent } from 'pliny/utils/contentlayer';
+import { formatDate } from 'pliny/utils/formatDate';
 
 interface PaginationProps {
   totalPages: number;
@@ -56,9 +56,9 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           </button>
         )}
         {nextPage && (
-          <Link 
-            href={`/${basePath}/page/${currentPage + 1}`} 
-            rel="next" 
+          <Link
+            href={`/${basePath}/page/${currentPage + 1}`}
+            rel="next"
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
           >
             Next →
@@ -154,10 +154,7 @@ export default function ListLayoutWithTags({
                           )}
                           <div className="flex-1 min-w-0">
                             <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                              <Link
-                                href={`/${path}`}
-                                className="text-gray-900 dark:text-gray-100"
-                              >
+                              <Link href={`/${path}`} className="text-gray-900 dark:text-gray-100">
                                 {title}
                               </Link>
                             </h2>
