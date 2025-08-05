@@ -56,14 +56,9 @@ Welcome to Ismail's digital playground 🚀`,
     ]);
   }, []);
 
-
   return (
     <div className="bg-gray-900 text-green-400 font-mono text-sm rounded border border-gray-700 max-w-2xl mx-auto my-8 w-full">
-
-      <div 
-        ref={terminalRef} 
-        className="p-3 h-64 sm:h-64 overflow-y-auto scrollbar-thin"
-      >
+      <div ref={terminalRef} className="p-3 h-64 sm:h-64 overflow-y-auto scrollbar-thin">
         {history.map((entry, index) => (
           <div key={index} className="mb-1">
             {entry.command && (
