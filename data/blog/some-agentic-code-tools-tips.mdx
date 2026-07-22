@@ -1,0 +1,45 @@
+---
+title: 'AI learning journey step 3 : Some agentic coding tools tips'
+date: '2026-07-22'
+tags: ['prompt', 'ai', 'agentic-coding']
+draft: false
+summary: Some tips to get the most out of agentic coding tools
+images: ['/static/images/agentic-code-tools.png']
+---
+
+We continue our AI learning journey, and this time, we'll see some tips to get the most out of agentic coding tools that become almost standard nowdays. 
+I personally have experience with claude code and continue plugin on vscode, but most agentic coding tools share the same best practices.
+
+### What are agentic coding tools for those who live under a rock ?
+
+Agentic coding tools are tools, that can in the form of a CLI, a web interface, or a plugin for your IDE, that can generate code, debug code, and even run code.
+They are called agentic tools because they can autonomously plan, execute, and iterate on a series of tasks, like what a contractor would do.
+One of the famous agentic coding tool you can try is claude code (there is no affiliation with Anthropic, I just like this tool).
+
+### Some tips to get the most out of agentic coding tools
+
+- **Ask the AI to plan first**: Before asking the tool to generate code, or develop a feature, ask it to make a plan without writing any code. And if possible, try the plan yourself.
+This approach was validated by many empirical studies on agentic tools like this [one](https://arxiv.org/abs/2310.06770) that shows that directly asking the AI to generate code is not the best approach.
+
+- **Provide your project context**: The more input you give to any AI tool, the better the output will be. If you are using an agentic coding tool,
+make sure to give it the context of your project, like the architecture, the frameworks used, and your coding guidelines. This will help the tool to more align with your standard and act as a pair programmer.
+However, be careful to not make the context too long, as this will cost you more tokens and can even make the tool buggy. 
+In Claude Code, you can provide the project context in a file named CLAUDE.md that you put at the root of your project.
+In Continue plugin, you can provide the context in a file you place at the root of your project, and you call it whenever you need the context in the session.
+
+- **Clear the session after finishing a task or when starting a new task**: By default, Agentic tools are stateful, they remember the global context of the session. If the session context becomes too long,
+the tool might become buggy and even hallucinate sometimes. In addition to that, the cost of the session will increase. It's better to keep the session context short and clear.
+
+- **When coding, ask the AI tool to first write a test that follows the requirement, and then code**: Before asking the AI tool to write code, ask it to implement the requirement in a test function. This will force the AI to translate the requirement into a concrete target that you can test, and that the AI can iterate on, before starting any implementation.
+By doing so, you reduce the risk of the AI tool misinterpreting the requirements.
+This practice is recommended in [Anthropic's own Claude Code best practices](https://code.claude.com/docs/en/best-practices). 
+
+- **Review the code generated in a new session, or in another model**: After the AI tool generates code, it's better to review it in a new session, or even using another model. 
+This helps the AI to not be biased by the previous context, and to have a new view on the output generated.
+
+### Conclusion
+
+Like any tech tool, you'll get better by a lot of practice, and by learning from your mistakes. And also like any tech tool, you'll get better results by following some best practices that the community has discovered over time.
+None of this is specific to Claude Code, these patterns apply to Continue, Cursor, or any agentic tool you use. 
+
+
