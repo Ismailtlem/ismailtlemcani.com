@@ -1,0 +1,50 @@
+---
+title: 'AI learning journey step 4 : Some additional AI notions'
+date: '2026-07-22'
+tags: ['prompt', 'ai', 'agentic-coding']
+draft: true
+summary: Some tips to get the most out of agentic coding tools
+images: ['/static/images/llm-inference.png']
+---
+
+This blog post is just some additional notions, that I think are important to clearly understand in order to move forward in your AI learning journey. It is a continuation of the first article in this series.
+The 2 sources from which I learned the most, about the notions mentioned in this article, are the following :
+- [Andrej Karpathy's Deep dive into LLMs](https://www.youtube.com/watch?v=7xTGNNLPyMI&t=7383s)
+- [xavki playlist on vLLM](https://www.youtube.com/watch?v=dHRy0KUTp_c&list=PLCAQWqWxvW_Q&index=9)
+
+
+## How models process text input
+In order to process an input data, simply, there is two big steps : tokenization and inference. Tokenization is about splitting the input data into smaller texts, called tokens, and inference is about processing those tokens to predict the next text (or more preceisely, the next token).
+
+<Image
+  alt={`inference-schema.png`}
+  src={`/static/images/inference-schema.png`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+
+If we want to summarize it, all what a model does is to predict the next token based on the previous tokens.
+
+## More details about how a model process a prompt
+
+Here are more details about what happens, when you send a prompt to a model : The model first breaks the text into small chunk of texts called tokens. This process is called tokenization. 
+Those tokens are after turned into numbers. 
+
+Next, it transforms these numerical IDs into embeddings—vector representations that place each word into a high-dimensional mathematical space. 
+The goal of this space is to position words according to their semantic meaning so the model can measure distances between concepts, 
+placing words with similar meanings or contexts closer together.
+These embeddings then pass through neural network layers, where the model evaluates how all the words relate to one another in context to calculate probabilities for every possible next token.
+Within these layers, model parameters (it's the billion parameters we hear that are associated to a model) 
+actively transform the vectors in order to get a final vector, this is done by absorbing the context from surrounding tokens.
+
+This final vector is compared against the model's entire dictionary to assign a score to every possible word based on how well it fits the context. These scores are then turned into probabilities, 
+allowing the model to select the winning token and convert it back into readable text. This is the next token that the model will predict. It is appended to the original prompt, repeating this loop one token at a time until the generation is complete.
+
+## Adjust a model response
+
+How to adjust a model's response comes down to a handful of sampling parameters exposed by most LLM APIs, 
+the most common being temperature, top-k, and top-p. Temperature controls how much randomness is applied when picking the next token: 
+near 0 makes the model deterministic and repetitive, closer to 1 makes it more varied and creative.
+

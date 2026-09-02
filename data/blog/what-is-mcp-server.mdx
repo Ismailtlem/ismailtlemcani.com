@@ -1,0 +1,174 @@
+---
+title: 'AI learning journey step 4 : First notions about MCP servers'
+date: '2026-08-20'
+tags: ['prompt', 'ai', 'mcp']
+draft: true
+summary: Some tips to get the most out of agentic coding tools
+images: ['/static/images/mcp-server.jpg']
+---
+
+
+We continue our journey in learning AI concepts, at least the important ones (this is going so fast :D). 
+In this blog post, we'll see a new buzz word that we hear a lot about : MCP.
+The sources that this blog post is inspired from are : 
+- [The official MCP documentation](http://modelcontextprotocol.io/)
+- [Hugging Face course about MCP](https://huggingface.co/learn/mcp-course/en/unit3_1/introduction)
+
+# What is an MCP ?
+
+MCP is a protocol like HTTP, 
+and it is used for connecting AI applications (like Claude Desktop) to external tools or resources (like an external app, 
+an external database, ...).
+
+# What are the benfits of MCP servers ? 
+
+In general, an AI application (like claude, or chatgpt) is as performant as the tools and resources and data it can access. It cannot process any action on a system that it cannot access.
+Also, it is generally trained on a limited and public set of data. It you want it to access your private data, it won't be able to do it without any proper integration.
+
+You'll find, in the image below, a very simple example that shows the purpose of using an MCP server.
+Imagine, you want to just add your TODO list items directly from your AI favorite app. Without any MCP integration, the AI app (claude in this example) doesn't know how to connect to get our TODO list items.
+<Image
+  alt={`without-mcp-example.png`}
+  src={`/static/images/without-mcp-example.png`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+If we make a simple MCP server, and we connect it to the AI app we are using, the AI app will be able to connect to our TODO list app and get the items we want, like shown below
+
+
+<Image
+  alt={`mcp-server-example.png`}
+  src={`/static/images/mcp-server-example.png`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+# Concepts in MCP
+
+## MCP architecture 
+MCP follows a client-server architecture that is very common in software development. An MCP host, which is an AI application like Claude Code or ChatGPT, make requests to one or many serverss
+
+In summary, there are 3 components that participate in this architecture: 
+- A host : It is the main AI app that the user is interacting with (like claude desktop, or chatgpt). 
+- A client : A software component inside the host, that is responsible for connecting and communicating with the server, which have access to the tools or the resources we want.
+- A server : An external software, hosted either on the same machine as the host, or on a remote machine. It exposes the tools and resources the client want to have access to.
+
+<Image
+  alt={`client-server-mcp.jpeg`}
+  src={`/static/images/client-server-mcp.jpeg`}
+  width={1440}
+  height={960}
+  priority
+/>
+
+## MCP primitives
+This is just a fancy word in MCP world, but it is important to understand what it means.
+
+MCP Primitives define just what does the server expose to the client. Those are : 
+
+- tools : which are functions that an AI model can use to perform an action or compute a value. 
+- resources : which are simply just read only data that the AI model can access to
+- prompts :  Prompt templates or workflows that guide the workflow between the user, the AI model, and the available capabilities.
+
+
+## How these components interact with each other ?
+
+In this section, we'll see briefly how these components interact with each other in a typical user interaction.
+
+- The first step is the user interacting with the AI application, typically by entering an input.
+
+- The Host analyzes the user’s input, it uses a model to try to understand the request, and then determine if it might need any external capabilities.
+
+-  If it needs any external resources or tools, the Host connects with its Client component, and ask the client to connect to the configured servers.
+
+- The Client then queries the server to discover what capabilities (Tools, Resources, Prompts) it has.
+
+- Based on the user’s input, the Host formulates a request to the Client, specifying which capability it wants to invoke and any necessary parameters.
+
+- The Server processes the needed functionality and returns the results back to the client.
+
+- The Client forwards the results to the Host, which then uses them to generate a response for the user.
+
+## Communication protocol
+
+At its core, MCP uses JSON-RPC as the base protocol of communication between clients and servers. 
+
+### Requests
+
+Requests sent from client to servers looks like this : 
+
+```json
+{
+  "jsonrpc": "2.0";
+  "id": string | number;
+  "method": string;
+  "params?": {
+    [key: string]: unknown;
+  }
+}
+
+```
+Here is an example :
+```json 
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "weather",
+    "arguments": {
+      "location": "San Francisco"
+    }
+  }
+}
+```
+
+
+### Responses
+
+Those are sent from the server to the client. A Response message includes:
+
+- The same id as the corresponding Request
+- Either a result (for success) or an error (for failure)
+
+```json 
+{
+  "jsonrpc": "2.0";
+  "id": string | number;
+  "result": {
+    [key: string]: unknown;
+  };
+}
+```
+Here is an example :
+```json 
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "temperature": 62,
+    "conditions": "Partly cloudy"
+  }
+}
+```
+
+### Notifications
+
+Notifications are messages sent from the client to the server or vice versa, as a one-way message. Those messages do not need any response back.
+
+Here is an example of a notification:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "progress",
+  "params": {
+    "message": "Processing data...",
+    "percent": 50
+  }
+}
+```
+
