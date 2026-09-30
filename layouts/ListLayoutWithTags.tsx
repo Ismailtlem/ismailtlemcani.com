@@ -129,7 +129,7 @@ export default function ListLayoutWithTags({
           <div className="flex-1">
             <ul>
               {displayPosts.map((post) => {
-                const { path, date, title, summary, tags, images } = post;
+                const { path, date, title, summary, tags, images, readingTime } = post;
                 return (
                   <li key={path} className="py-5">
                     <article className="flex flex-col space-y-2 xl:space-y-0">
@@ -137,6 +137,14 @@ export default function ListLayoutWithTags({
                         <dt className="sr-only">Published on</dt>
                         <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                           <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                          {readingTime?.text && (
+                            <>
+                              <span className="mx-2" aria-hidden="true">
+                                ·
+                              </span>
+                              <span>{readingTime.text}</span>
+                            </>
+                          )}
                         </dd>
                       </dl>
                       <div className="space-y-3">

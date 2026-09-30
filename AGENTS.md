@@ -47,3 +47,11 @@ light and dark themes.
 
 Use short, clear commit messages such as `add kubernetes article` or `fix post image`. Pull
 requests should briefly explain the change and include screenshots when the UI changes.
+
+## AGENTS.md Maintenance
+
+After completing an implementation plan:
+
+1. Review the changes made during the implementation.
+2. Determine whether they introduce durable project knowledge that future agents should know.
+3. If yes, update the relevant AGENTS.md file before considering the task complete.
