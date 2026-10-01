@@ -1,10 +1,11 @@
-import { allBlogs } from '../.contentlayer/generated/index.mjs';
 import { escape } from 'pliny/utils/htmlEscaper.js';
-import { writeFileSync, mkdirSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import GithubSlugger from 'github-slugger';
 import path from 'path';
 import siteMetadata from '../data/siteMetadata.js';
-import tagData from '../app/tag-data.json' assert { type: 'json' };
+
+const allBlogs = JSON.parse(readFileSync('./.contentlayer/generated/Blog/_index.json', 'utf8'));
+const tagData = JSON.parse(readFileSync('./app/tag-data.json', 'utf8'));
 
 const generateRssItem = (config, post) => `
   <item>

@@ -1,29 +1,29 @@
-import { ComputedFields, defineDocumentType, makeSource } from 'contentlayer/source-files'
-import { writeFileSync } from 'fs'
-import GithubSlugger from 'github-slugger'
-import path from 'path'
-import readingTime from 'reading-time'
+import { ComputedFields, defineDocumentType, makeSource } from 'contentlayer/source-files';
+import { readFileSync, writeFileSync } from 'fs';
+import GithubSlugger from 'github-slugger';
+import path from 'path';
+import readingTime from 'reading-time';
 // Remark packages
 import {
   extractTocHeadings,
   remarkCodeTitles,
   remarkExtractFrontmatter,
   remarkImgToJsx,
-} from 'pliny/mdx-plugins/index.js'
-import remarkGfm from 'remark-gfm'
-import remarkMath from 'remark-math'
+} from 'pliny/mdx-plugins/index.js';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
 // Rehype packages
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeCitation from 'rehype-citation'
-import rehypeKatex from 'rehype-katex'
-import rehypePresetMinify from 'rehype-preset-minify'
-import rehypePrismPlus from 'rehype-prism-plus'
-import rehypeSlug from 'rehype-slug'
-import siteMetadata from './data/siteMetadata'
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeCitation from 'rehype-citation';
+import rehypeKatex from 'rehype-katex';
+import rehypePresetMinify from 'rehype-preset-minify';
+import rehypePrismPlus from 'rehype-prism-plus';
+import rehypeSlug from 'rehype-slug';
+import siteMetadata from './data/siteMetadata';
 
-const root = process.cwd()
-const isProduction = process.env.NODE_ENV === 'production'
+const root = process.cwd();
+const isProduction = process.env.NODE_ENV === 'production';
 
 const computedFields: ComputedFields = {
   readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
@@ -40,26 +40,26 @@ const computedFields: ComputedFields = {
     resolve: (doc) => doc._raw.sourceFilePath,
   },
   toc: { type: 'string', resolve: (doc) => extractTocHeadings(doc.body.raw) },
-}
+};
 
 /**
  * Count the occurrences of all tags across blog posts and write to json file
  */
 function createTagCount(allBlogs) {
-  const tagCount: Record<string, number> = {}
+  const tagCount: Record<string, number> = {};
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
-        const formattedTag = GithubSlugger.slug(tag)
+        const formattedTag = GithubSlugger.slug(tag);
         if (formattedTag in tagCount) {
-          tagCount[formattedTag] += 1
+          tagCount[formattedTag] += 1;
         } else {
-          tagCount[formattedTag] = 1
+          tagCount[formattedTag] = 1;
         }
-      })
+      });
     }
-  })
-  writeFileSync('./app/tag-data.json', JSON.stringify(tagCount))
+  });
+  writeFileSync('./app/tag-data.json', JSON.stringify(tagCount));
 }
 
 function createSearchIndex(allBlogs) {
@@ -70,8 +70,8 @@ function createSearchIndex(allBlogs) {
     writeFileSync(
       `public/${siteMetadata.search.kbarConfig.searchDocumentsPath}`,
       JSON.stringify(allCoreContent(sortPosts(allBlogs)))
-    )
-    console.log('Local search index generated...')
+    );
+    console.log('Local search index generated...');
   }
 }
 
@@ -109,7 +109,7 @@ export const Blog = defineDocumentType(() => ({
       }),
     },
   },
-}))
+}));
 
 export const Authors = defineDocumentType(() => ({
   name: 'Authors',
@@ -127,7 +127,7 @@ export const Authors = defineDocumentType(() => ({
     layout: { type: 'string' },
   },
   computedFields,
-}))
+}));
 
 export const Resume = defineDocumentType(() => ({
   name: 'Resume',
@@ -140,7 +140,7 @@ export const Resume = defineDocumentType(() => ({
     layout: { type: 'string' },
   },
   computedFields,
-}))
+}));
 export default makeSource({
   contentDirPath: 'data',
   documentTypes: [Blog, Authors, Resume],
@@ -162,9 +162,11 @@ export default makeSource({
       rehypePresetMinify,
     ],
   },
-  onSuccess: async (importData) => {
-    const { allBlogs } = await importData()
-    createTagCount(allBlogs)
-    createSearchIndex(allBlogs)
+  onSuccess: async () => {
+    const allBlogs = JSON.parse(
+      readFileSync(path.join(root, '.contentlayer', 'generated', 'Blog', '_index.json'), 'utf8')
+    );
+    createTagCount(allBlogs);
+    createSearchIndex(allBlogs);
   },
-})
+});
