@@ -24,11 +24,6 @@ Name new blog files with lowercase kebab-case, for example
 
 - `npm install`: install dependencies.
 - `npm run dev`: start the local site at `http://localhost:3000`.
-- `npm run lint`: run ESLint and automatically fix supported issues.
-- `npm run build`: create a production build and generate RSS/search data.
-- `npm run serve`: serve the production build locally.
-
-Run `npm run lint` and `npm run build` before submitting changes.
 
 ## Coding Style
 
@@ -47,6 +42,13 @@ light and dark themes.
 
 Use short, clear commit messages such as `add kubernetes article` or `fix post image`. Pull
 requests should briefly explain the change and include screenshots when the UI changes.
+
+## Progress Tracking
+
+For long-running tasks:
+
+1. Read `PROGRESS.md` at the start of every session.
+2. Update its **Done**, **In progress**, and **Blocked** sections before ending the session.
 
 ## AGENTS.md Maintenance
 

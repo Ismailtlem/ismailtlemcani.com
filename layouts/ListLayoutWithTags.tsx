@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 'use client';
 
+import { slug } from 'github-slugger';
 import Image from '@/components/Image';
 import Link from '@/components/Link';
 import Tag from '@/components/Tag';
-import { slug } from 'github-slugger';
 
+import { CoreContent } from 'pliny/utils/contentlayer';
+import { formatDate } from 'pliny/utils/formatDate';
+import { usePathname } from 'next/navigation';
 import siteMetadata from '@/data/siteMetadata';
 import tagData from 'app/tag-data.json';
 import type { Blog } from 'contentlayer/generated';
-import { usePathname } from 'next/navigation';
-import { CoreContent } from 'pliny/utils/contentlayer';
-import { formatDate } from 'pliny/utils/formatDate';
 
 interface PaginationProps {
   totalPages: number;
@@ -79,6 +79,10 @@ export default function ListLayoutWithTags({
   const tagCounts = tagData as Record<string, number>;
   const tagKeys = Object.keys(tagCounts);
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a]);
+  const isBlogIndex = pathname.startsWith('/blog');
+  const activeTag = pathname.startsWith('/tags/')
+    ? decodeURI(pathname.split('/tags/')[1])
+    : null;
 
   const displayPosts = initialDisplayPosts.length > 0 ? initialDisplayPosts : posts;
 
@@ -90,42 +94,78 @@ export default function ListLayoutWithTags({
             {title}
           </h1>
         </div>
-        <div className="flex sm:space-x-24">
-          <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded bg-gray-50 pt-5 shadow-md dark:bg-gray-900/70 dark:shadow-gray-800/40 sm:flex">
-            <div className="px-6 py-4">
-              {pathname.startsWith('/blog') ? (
-                <h3 className="text-primary-500 font-bold uppercase">Tags</h3>
-              ) : (
-                <Link
-                  href={`/blog`}
-                  className="font-bold uppercase text-gray-700 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500"
-                >
-                  All Posts
-                </Link>
-              )}
-              <ul>
-                {sortedTags.map((t) => {
+        <div className="flex sm:gap-12 lg:gap-20">
+          <aside className="hidden min-w-[220px] max-w-[220px] border-r border-gray-200/80 pr-8 dark:border-gray-800 sm:block">
+            <nav className="sticky top-24 py-8" aria-label="Browse posts by tag">
+              <div className="mb-6 flex items-center gap-3">
+                <span
+                  className="h-px w-7 bg-amber-700/60 dark:bg-amber-300/50"
+                  aria-hidden="true"
+                />
+                <h2 className="text-[11px] font-medium uppercase tracking-[0.28em] text-gray-500 dark:text-gray-400">
+                  Tags
+                </h2>
+              </div>
+              <ul className="space-y-0.5">
+                <li>
+                  <Link
+                    href="/blog"
+                    aria-current={isBlogIndex ? 'page' : undefined}
+                    className={`group flex items-center justify-between py-2 text-sm transition-colors ${
+                      isBlogIndex
+                        ? 'text-gray-950 dark:text-white'
+                        : 'text-gray-500 hover:text-gray-950 dark:text-gray-400 dark:hover:text-white'
+                    }`}
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <span
+                        className={`h-1 w-1 rotate-45 transition-colors ${
+                          isBlogIndex
+                            ? 'bg-amber-700 dark:bg-amber-300'
+                            : 'bg-transparent group-hover:bg-amber-700/60 dark:group-hover:bg-amber-300/60'
+                        }`}
+                        aria-hidden="true"
+                      />
+                      All articles
+                    </span>
+                  </Link>
+                </li>
+                {sortedTags.map((tag) => {
+                  const isActive = activeTag === slug(tag);
+
                   return (
-                    <li key={t} className="my-3">
-                      {decodeURI(pathname.split('/tags/')[1]) === slug(t) ? (
-                        <h3 className="inline px-3 py-2 text-sm font-bold uppercase text-primary-500">
-                          {`${t} (${tagCounts[t]})`}
-                        </h3>
-                      ) : (
-                        <Link
-                          href={`/tags/${slug(t)}`}
-                          className="px-3 py-2 text-sm font-medium uppercase text-gray-500 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500"
-                          aria-label={`View posts tagged ${t}`}
-                        >
-                          {`${t} (${tagCounts[t]})`}
-                        </Link>
-                      )}
+                    <li key={tag}>
+                      <Link
+                        href={`/tags/${slug(tag)}`}
+                        aria-label={`View posts tagged ${tag}`}
+                        aria-current={isActive ? 'page' : undefined}
+                        className={`group flex items-center justify-between py-2 text-sm transition-colors ${
+                          isActive
+                            ? 'text-gray-950 dark:text-white'
+                            : 'text-gray-500 hover:text-gray-950 dark:text-gray-400 dark:hover:text-white'
+                        }`}
+                      >
+                        <span className="flex min-w-0 items-center gap-2.5">
+                          <span
+                            className={`h-1 w-1 flex-none rotate-45 transition-colors ${
+                              isActive
+                                ? 'bg-amber-700 dark:bg-amber-300'
+                                : 'bg-transparent group-hover:bg-amber-700/60 dark:group-hover:bg-amber-300/60'
+                            }`}
+                            aria-hidden="true"
+                          />
+                          <span className="truncate">{tag}</span>
+                        </span>
+                        <span className="ml-3 text-[11px] tabular-nums text-gray-400 dark:text-gray-600">
+                          {tagCounts[tag]}
+                        </span>
+                      </Link>
                     </li>
                   );
                 })}
               </ul>
-            </div>
-          </div>
+            </nav>
+          </aside>
           <div className="flex-1">
             <ul>
               {displayPosts.map((post) => {
