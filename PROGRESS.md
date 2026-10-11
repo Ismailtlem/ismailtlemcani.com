@@ -11,6 +11,9 @@ Use this file to track state for long-running tasks.
 
 ## Done
 
+- Removed the thumbnail image from default article headers in `layouts/PostLayout.tsx`,
+  keeping `/blog` list icons and SEO images. Lint and production build passed; verified
+  the article on desktop/mobile in light/dark themes and the `/blog` icon in the browser.
 - Created persistent progress tracking for long-running tasks.
 - Restyled the `/blog` and `/tags/*` tag sidebar with a minimalist, luxury-inspired
   navigation treatment in `layouts/ListLayoutWithTags.tsx`.
@@ -22,5 +25,4 @@ Use this file to track state for long-running tasks.
 
 ## Blocked
 
-- `npm run build` cannot finish in the sandbox because `next/font` cannot reach
-  `fonts.googleapis.com` to download the existing Space Grotesk font.
+- Nothing currently blocked. The production build passed in the latest session.

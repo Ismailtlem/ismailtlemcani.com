@@ -16,6 +16,9 @@ TypeScript, Tailwind CSS, Contentlayer, and MDX.
 - `public/static/images/`: images used by the site and blog posts.
 - `css/`: global Tailwind and code-highlighting styles.
 
+Post front matter `images` supplies list thumbnails and social/SEO metadata. The default
+`layouts/PostLayout.tsx` does not display that image in the article header.
+
 Name new blog files with lowercase kebab-case, for example
 `data/blog/my-new-article.mdx`. Follow the front matter used by existing posts, including
 `title`, `date`, `tags`, `draft`, `summary`, and `images`.
