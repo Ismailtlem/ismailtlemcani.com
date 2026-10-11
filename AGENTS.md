@@ -19,6 +19,9 @@ TypeScript, Tailwind CSS, Contentlayer, and MDX.
 Post front matter `images` supplies list thumbnails and social/SEO metadata. The default
 `layouts/PostLayout.tsx` does not display that image in the article header.
 
+Inline code styling in `tailwind.config.js` hides Typography's decorative backticks;
+keep Markdown backticks in post sources to preserve code formatting.
+
 Name new blog files with lowercase kebab-case, for example
 `data/blog/my-new-article.mdx`. Follow the front matter used by existing posts, including
 `title`, `date`, `tags`, `draft`, `summary`, and `images`.
@@ -39,10 +42,7 @@ with existing components.
 
 ## Checks and Contributions
 
-There is no automated test suite. Verify changes with linting, a production build, and a quick
-browser check of affected pages. For visual changes, check mobile and desktop layouts as well as
-light and dark themes.
-
+There is no automated test suite. 
 Use short, clear commit messages such as `add kubernetes article` or `fix post image`. Pull
 requests should briefly explain the change and include screenshots when the UI changes.
 

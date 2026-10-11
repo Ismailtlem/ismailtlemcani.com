@@ -1,0 +1,80 @@
+---
+title: 'AI learning journey step 5 : Notions about harness engineering'
+date: '2026-10-11'
+tags: ['ai', 'agentic-coding']
+draft: false
+summary: 'How to take the most from agentic coding tools.'
+images: ['/static/images/claude-icon.jpg']
+---
+
+We continue our AI learning journey, with a blog post about a new buzzword: harness engineering :D 
+
+In short, it is the practice of designing a software in a way to make it easy for an AI agent to understand and contribute to it. 
+
+I mostly followed this course [Learn Harness Engineering course by Walking Labs](https://walkinglabs.github.io/learn-harness-engineering/) and I tried to apply this to a personal project [Darindex](https://darindex.com).
+
+## What is harness engineering simply ? and why is it important ?
+
+In this current AI era, where we have access to very powerful AI agents, some people still find it hard to develop new features or fix bugs in an existing codebase.
+Most of the time, the first reflex is to use a more pwerful AI agent, hoping that it will be able to resolve the issue and that it was only a matter of capacity. 
+But most of the time, the issue is about guiding the AI agent and giving it the right context. This is what is called harness engineering. 
+It is about guiding the AI agent, with the right context, the right instructions, and the right guidance to verify its work. This term was 
+mostly introduced in the industry in early 2026, and one of the first blog post that made it popular was (this OpenAI blog post)[https://openai.com/index/harness-engineering/].
+
+## Core principle of Harness engineering
+
+In short, as OpenAI explains it, the core principle of harness engineering is **the repo IS the spec**. All necessary context should live in the repository, because
+that is the only thing that the AI agent can access. The context should be delivered through structured instruction files, explicit verification commands, and clear directory organization
+
+## AGENTS.md file 
+**Where to start ?** : The first file to create is the `AGENTS.md` file (or `CLAUDE.md` file, but the standard is `AGENTS.md` that now Claude code also supports). 
+It is basically a .md file that should explain the project briefly, and link the AI agent to the right context to find when needed.
+
+Here is simple example of a simple `AGENTS.md` file that is cited in the walking labs course.
+```md
+
+## Project Overview
+Python 3.11 FastAPI backend, PostgreSQL 15 database.
+
+## Quick Start
+- Install: `make setup`
+- Test: `make test`
+- Full verification: `make check`
+
+## Hard Constraints
+- All APIs must use OAuth 2.0 authentication
+- All database queries must use SQLAlchemy 2.0 syntax
+- All PRs must pass pytest + mypy --strict + ruff check
+
+## Topic Docs
+- API Design Patterns (`docs/api-patterns.md`) — Required reading when adding endpoints
+- Database Rules (`docs/database-rules.md`) — Required when modifying database operations
+- Testing Standards (`docs/testing-standards.md`) — Reference when writing tests
+```
+## Some other principles to follow to design a good harness
+### Keep the AGENTS.md file small and simple
+
+After creating `AGENTS.md`, it is tempting to put every instruction inside it. Each time the agent makes a mistake, we add another rule, and the file keeps growing :D.
+
+The course recommends [splitting instructions across files](<https://walkinglabs.github.io/learn-harness-engineering/en/lectures/lecture-04-why-one-giant-instruction-file-fails/>) so the agent reads detailed guidance when the task requires it.
+
+In Darindex, the architecture documentation explains where code belongs:
+
+```
+app/api/routes/    → HTTP endpoints
+app/api/deps.py    → Dependency factories and authentication dependencies
+app/services/     → Business logic
+app/repositories/ → SQLAlchemy queries and persistence
+app/models/       → Database models
+app/schemas/      → Request and response models
+```
+
+It also documents the request flow:
+
+```
+route → service → repository → database
+```
+
+This helps the agent place a new business rule in the service layer and a database query in the repository layer. These details stay in `docs/ARCHITECTURE.md`, while `AGENTS.md` tells the agent when to read them.
+
+

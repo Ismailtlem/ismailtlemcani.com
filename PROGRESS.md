@@ -11,6 +11,15 @@ Use this file to track state for long-running tasks.
 
 ## Done
 
+- Removed decorative backticks around inline code through `tailwind.config.js`.
+  Lint and production build passed; verified article rendering on desktop in light
+  theme and mobile in dark theme, including computed pseudo-element styles.
+
+- Extended `data/blog/notions-about-harness-engineering.mdx` with Darindex agency flow,
+  test coverage limits, and linked harness engineering sources. Read-only site lint,
+  Prettier check, `npm run build` including postbuild, `git diff --check`, and browser
+  review passed. No application code changed; no commit or push was made.
+
 - Removed the thumbnail image from default article headers in `layouts/PostLayout.tsx`,
   keeping `/blog` list icons and SEO images. Lint and production build passed; verified
   the article on desktop/mobile in light/dark themes and the `/blog` icon in the browser.
